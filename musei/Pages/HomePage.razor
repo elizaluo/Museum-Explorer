@@ -1,0 +1,17 @@
+﻿@page "/home"
+
+@using Radzen
+
+<RadzenText TextStyle="TextStyle.H3">Events and News</RadzenText>
+<div class="eventNewsList">
+    <EventCard EventName="Dino Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="images/dino.jpeg" Body=@bodyTextFiller />
+    <EventCard EventName="Other Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="images/dino.jpeg" Body=@bodyTextFiller />
+    <EventCard EventName="Mummy Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="images/dino.jpeg" Body=@bodyTextFiller />
+    <EventCard EventName="Rome Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="images/dino.jpeg" Body=@bodyTextFiller />
+</div>
+
+@code {
+    String bodyTextFiller = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
+}
+
