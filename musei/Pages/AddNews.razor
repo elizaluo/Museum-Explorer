@@ -1,0 +1,32 @@
+﻿@page "/addnews"
+
+@using Radzen
+@using Microsoft.Maui.Graphics
+@using System.Text.Json
+
+<link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
+
+<h3>Add News</h3>
+
+<RadzenCard>
+    <RadzenTextBox Placeholder="Title" Class="w-100" />
+    <RadzenTextBox Placeholder="Museum" Class="w-100" />
+    <!--
+    <div display="flex" flexDirection="row" class="row align-items-center">
+        <div class="col w-60 float: left">
+            <RadzenTextBox Placeholder="Date" />
+        </div>
+        <div class="col w-60 float: right">
+            <RadzenTextBox Placeholder="Time" />
+        </div>
+    </div>
+    -->
+    <RadzenTextArea Placeholder="Body" Class="w-100" Rows="12" />
+    <RadzenUpload Multiple="false" Accept="image/*" Url="upload/single" class="w-100" ChooseText="Select Image" />
+</RadzenCard>
+
+<RadzenCard class="row align-items-center">
+    <RadzenButton Text="Post News" class="align-items-center" />
+</RadzenCard>
+
+
