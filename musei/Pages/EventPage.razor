@@ -1,13 +1,14 @@
-﻿@page "/eventcard"
-
+﻿@page "/event"
 @using Radzen
-@using Microsoft.Maui.Graphics
 
 <link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
 
+<h3>@EventName </h3>
+<RadzenCard>
+    <img src=@ImagePath />
+</RadzenCard>
 <RadzenCard>
     <div>
-        <img src=@ImagePath />
         @*<MauiImage Include="Resources/Images/dino.jpeg" Color="#512BD4" />*@
 
         <div class="flexRow">
@@ -31,24 +32,27 @@
 
 
 </RadzenCard>
+<RadzenButton class="mainColor" Style="width: 100%;" Text="Register" />
+
 
 @code {
-    [Parameter]
-    public string EventName { get; set; }
 
     [Parameter]
-    public string MuseumName { get; set; }
+    public string EventName { get; set; } = "Dino Event";
 
     [Parameter]
-    public string Date { get; set; }
+    public string MuseumName { get; set; } = "Dino Musuem";
 
     [Parameter]
-    public string Time { get; set; }
+    public string Date { get; set; } = "11/11/11";
 
     [Parameter]
-    public string Body { get; set; }
+    public string Time { get; set; } = "12:30 - 5:30";
 
     [Parameter]
-    public string ImagePath { get; set; }
+    public string Body { get; set; } = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris";
+
+    [Parameter]
+    public string ImagePath { get; set; } = "images/dino.jpeg";
 }
 
