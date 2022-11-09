@@ -1,0 +1,45 @@
+﻿@page "/payment"
+@using Radzen
+
+<link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
+
+<h3>Payment</h3>
+
+<RadzenCard>
+    <div class="flexRow">
+        <div class="flexStart">
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@NumberOfTickets Ticket(s)</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">Taxes and fees</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">Total</RadzenText>
+
+        </div>
+        <div class="flexEnd">
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@TicketPrice</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@TaxesFees</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Total</RadzenText>
+        </div>
+    </div>
+</RadzenCard>
+<RadzenCard>
+    <RadzenAutoComplete Placeholder="Name on card" Style="width: 100%;" />
+    <RadzenAutoComplete Placeholder="Debit/Credit card number" Style="width: 100%;" />
+    <RadzenAutoComplete Placeholder="Expiration date MM/YY" Style="width: 100%;" />
+    <RadzenAutoComplete Placeholder="Security code" Style="width: 100%;" />
+    <RadzenAutoComplete Placeholder="Zip code" Style="width: 100%;" />
+</RadzenCard>
+<RadzenButton class="mainColor" Style="width: 100%;" Text="Pay now" />
+
+
+@code {
+    [Parameter]
+    public int NumberOfTickets { get; set; }
+
+    [Parameter]
+    public int TicketPrice { get; set; }
+
+    [Parameter]
+    public int TaxesFees { get; set; }
+
+    [Parameter]
+    public int Total { get; set; }
+}
