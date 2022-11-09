@@ -1,0 +1,68 @@
+﻿@page "/museumcardclient"
+
+@using Radzen
+@using Microsoft.Maui.Graphics
+
+<link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
+
+<RadzenCard>
+    <div class="flexRow">
+        <div class="leftAlign">
+            <img src=@ImagePath />
+
+            <div>
+                <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
+            </div>
+
+            <div>
+                <div class="flexRow">
+                    <RadzenIcon Icon="account_balance" />
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@Address</RadzenText>
+                </div>
+                <div class="flexRow">
+                    <RadzenIcon Icon="event" />
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@OpeningHours</RadzenText>
+                </div>
+
+            </div>
+
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Danger button")) Text=@buttonStatus ButtonStyle="ButtonStyle.Danger" />
+
+        </div>
+        <div class="rightAlign">
+            <RadzenPanelMenuItem Text=">" Path="/museum" Style="font-size: 50px; font-weight: bold">
+
+            </RadzenPanelMenuItem>
+        </div>
+    </div>
+
+
+</RadzenCard>
+
+@code {
+    [Parameter]
+    public string MuseumName { get; set; }
+
+    [Parameter]
+    public string Address { get; set; }
+
+    [Parameter]
+    public string OpeningHours { get; set; }
+
+    [Parameter]
+    public string ImagePath { get; set; }
+
+    private string buttonStatus = "Follow";
+
+    void OnClick(string buttonName)
+    {
+        if (buttonStatus == "Follow")
+        {
+            buttonStatus = "Unfollow";
+        }
+        else
+        {
+            buttonStatus = "Follow";
+        }
+    }
+}
