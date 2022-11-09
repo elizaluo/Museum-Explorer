@@ -5,10 +5,18 @@
 @using System.Text.Json
 
 <link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
+<style>
+    .flexColumn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 5px;
+    }
+</style>
 
 <h3>Create New Event</h3>
 
-<RadzenCard>
+<RadzenCard class="flexColumn">
     <RadzenTextBox Placeholder="Name" Class="w-100" />
     <RadzenTextBox Placeholder="Museum" Class="w-100" />
     <!--

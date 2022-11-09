@@ -7,6 +7,13 @@
         flex-direction: row;
     }
 
+    .flexColumn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
     .rightAlign {
         margin-left: auto;
         margin-right: 0;
@@ -22,32 +29,32 @@
 </style>
 
 <h3>@EventName </h3>
-<RadzenCard>
+
+<div class="flexColumn">
     <img src=@ImagePath />
-</RadzenCard>
-<RadzenCard>
-    <div>
-        <div class="flexRow">
-            <div>
-                <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left">@EventName</RadzenText>
-                <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
-            </div>
-            <div class="rightAlign">
-                <div class="flexRow rightAlign flexEnd">
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Date</RadzenText>
-                    <RadzenIcon Icon="schedule" />
+    <RadzenCard>
+        <div>
+            <div class="flexRow">
+                <div>
+                    <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left">@EventName</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
                 </div>
-                <div class="flexRow rightAlign flexEnd">
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Time</RadzenText>
-                    <RadzenIcon Icon="event" />
+                <div class="rightAlign">
+                    <div class="flexRow rightAlign flexEnd">
+                        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Date</RadzenText>
+                        <RadzenIcon Icon="schedule" />
+                    </div>
+                    <div class="flexRow rightAlign flexEnd">
+                        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Time</RadzenText>
+                        <RadzenIcon Icon="event" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div>@Body</div>
-</RadzenCard>
-<RadzenButton class="mainColor" Style="width: 100%;" Text="Register" />
-
+        <div>@Body</div>
+    </RadzenCard>
+    <RadzenButton class="mainColor" Style="width: 100%;" Text="Register" />
+</div>
 
 @code {
 
