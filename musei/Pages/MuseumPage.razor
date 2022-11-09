@@ -1,6 +1,27 @@
 ﻿@page "/museum"
 @using Radzen
 
+
+<style>
+    .flexColumn {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .flexRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 10px;
+    }
+
+    .eventNewsList {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+</style>
+
 <div class="flexColumn">
     <RadzenText TextStyle="TextStyle.H2">Museum Name</RadzenText>
     <div class="flexRow">
@@ -10,17 +31,17 @@
         </div>
         <div class="flexRow">
             <RadzenIcon Icon="schedule" />
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">M-F: 8 - 18<br/>SAT: 10 - 16<br/>SUN: Closed</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">M-F: 8 - 18<br />SAT: 10 - 16<br />SUN: Closed</RadzenText>
         </div>
     </div>
     <div class="eventNewsList">
-        <EventCard EventName="Dino Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller/>
+        <EventCard EventName="Dino Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
         <EventCard EventName="Other Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
         <EventCard EventName="Mummy Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
         <EventCard EventName="Rome Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
     </div>
-
 </div>
+
 @code {
     String bodyTextFiller = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 }

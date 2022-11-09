@@ -1,7 +1,39 @@
 ﻿@page "/payment"
 @using Radzen
 
-<link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
+<style>
+    .flexRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .flexColumn {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .flexStart {
+        align-self: flex-start;
+    }
+
+    .flexEnd {
+        align-self: flex-end;
+    }
+
+    .alignleft {
+        float: left;
+    }
+
+    .alignright {
+        float: right;
+    }
+
+    .mainColor {
+        color: #F52D11;
+        background-color: #F52D11;
+    }
+</style>
 
 <h3>Payment</h3>
 

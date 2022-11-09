@@ -1,7 +1,25 @@
 ﻿@page "/event"
 @using Radzen
 
-<link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
+<style>
+    .flexRow {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .rightAlign {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .flexEnd {
+        justify-content: flex-end;
+    }
+
+    img {
+        max-width: 100%;
+    }
+</style>
 
 <h3>@EventName </h3>
 <RadzenCard>
@@ -9,8 +27,6 @@
 </RadzenCard>
 <RadzenCard>
     <div>
-        @*<MauiImage Include="Resources/Images/dino.jpeg" Color="#512BD4" />*@
-
         <div class="flexRow">
             <div>
                 <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left">@EventName</RadzenText>
@@ -29,8 +45,6 @@
         </div>
     </div>
     <div>@Body</div>
-
-
 </RadzenCard>
 <RadzenButton class="mainColor" Style="width: 100%;" Text="Register" />
 
