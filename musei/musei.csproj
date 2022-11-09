@@ -52,4 +52,20 @@
       <PackageReference Include="Radzen.Blazor" Version="4.1.14" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\Images\Vector.svg" />
+      <None Remove="Resources\Images\image 3.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <BundleResource Include="wwwroot\Images\randmuseum.png" />
+      <BundleResource Include="wwwroot\Images\check.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Remove="wwwroot\Images\randmuseum.png" />
+      <Content Remove="wwwroot\Images\" />
+      <Content Remove="wwwroot\Images\950793.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="wwwroot\Images\" />
+    </ItemGroup>
 </Project>

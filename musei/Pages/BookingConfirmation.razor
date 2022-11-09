@@ -1,0 +1,28 @@
+﻿@using Radzen
+@page "/bookconfirm"
+
+<RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Center">Booking Confirmed!</RadzenText>
+
+<style>
+    .flexColumn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-6 flexColumn">
+            <RadzenImage Path="images/check.png" Style="width: 30%; margin: 3rem" />
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Center">
+                Visit to {Title} on {Date} at {Time} at {Location}.
+            </RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center">
+                Confirmation and booking information has been sent to your email.
+            </RadzenText>
+            <RadzenImage Path="images/randmuseum.png" Style="width: 80%; margin: 1rem; align-self: center" />
+        </div>
+    </div>
+</div>
