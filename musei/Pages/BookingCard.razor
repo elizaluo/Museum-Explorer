@@ -1,0 +1,62 @@
+﻿@page "/bookingcard"
+
+@using Radzen
+@using Microsoft.Maui.Graphics
+
+<link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
+
+<RadzenCard>
+    <div class="flexRow">
+        <div class="leftAlign">
+            <img src=@ImagePath />
+
+            <div>
+                <div class="flexRow">
+                    <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left"><strong>@EventName</strong></RadzenText>
+                    <div class="flexRow rightAlign">
+                        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@EventDate</RadzenText>
+                        <RadzenIcon Icon="event" />
+                    </div>
+                </div>
+                <div class="flexRow">
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
+                    <div class="flexRow rightAlign">
+                        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@EventTime</RadzenText>
+                        <RadzenIcon Icon="alarm" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <RadzenText TextStyle="TextStyle.H6" TextAlign="TextAlign.Left">Short Description</RadzenText>
+                <div>@Body</div>
+            </div>
+        </div>
+    </div>
+
+
+</RadzenCard>
+
+@code {
+    [Parameter]
+    public string EventName { get; set; }
+
+    [Parameter]
+    public string MuseumName { get; set; }
+
+    [Parameter]
+    public string EventDate { get; set; }
+
+    [Parameter]
+    public string EventTime { get; set; }
+
+    [Parameter]
+    public string Body { get; set; }
+
+    [Parameter]
+    public string ImagePath { get; set; }
+
+
+
+}
+
