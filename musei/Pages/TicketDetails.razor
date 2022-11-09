@@ -1,0 +1,29 @@
+﻿@page "/ticketdetails"
+
+@using Radzen
+@using Microsoft.Maui.Graphics
+@using System.Text.Json
+
+<link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
+
+<h3>{Event Name} on {Date}</h3>
+<h6>at {Time}</h6>
+
+<RadzenCard>
+    <h5>Person 1</h5>
+    <RadzenTextBox Placeholder="Name" Class="w-100" />
+    <RadzenTextBox Placeholder="Email" Class="w-100" />
+    <RadzenTextArea Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" />
+</RadzenCard>
+<RadzenCard>
+    <h5>Person 2 (optional)</h5>
+    <RadzenTextBox Placeholder="Name" Class="w-100" />
+    <RadzenTextBox Placeholder="Email" Class="w-100" />
+    <RadzenTextArea Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" />
+</RadzenCard>
+<RadzenCard class="row align-items-center">
+    <RadzenButton Text="+Add Person" class="align-items-center" />
+</RadzenCard>
+<RadzenCard class="row align-items-center">
+    <RadzenButton Text="Next" class="align-items-center" />
+</RadzenCard>
