@@ -8,11 +8,12 @@
 <RadzenCard>
     <div class="flexRow">
         <div class="leftAlign">
-            <img src=@ImagePath />
-
-            <div>
-                <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
-            </div>
+            <a href="/museum">
+                <img src=@ImagePath />
+            </a>
+            <h4>
+                <RadzenLink Style="color: black" Text=@MuseumName Path="/museum"/>
+            </h4>
 
             <div>
                 <div class="flexRow">
@@ -29,14 +30,7 @@
             <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Danger button")) Text=@buttonStatus ButtonStyle="ButtonStyle.Danger" />
 
         </div>
-        <div class="rightAlign">
-            <RadzenPanelMenuItem Text=">" Path="/museum" Style="font-size: 50px; font-weight: bold">
-
-            </RadzenPanelMenuItem>
-        </div>
     </div>
-
-
 </RadzenCard>
 
 @code {
