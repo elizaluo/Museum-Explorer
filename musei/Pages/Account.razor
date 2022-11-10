@@ -10,12 +10,16 @@
 
 <div class="flexRow" style="justify-content:space-evenly">
     <RadzenText TextAlign="TextAlign.Left">
-        <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Danger button")) Text="Reset Password"
-                      ButtonStyle="ButtonStyle.Danger" />
+        <a href="/changepassword">
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Danger button")) Text="Reset Password"
+                          ButtonStyle="ButtonStyle.Danger" />
+        </a>
     </RadzenText>
     <RadzenText TextAlign="TextAlign.Right">
-        <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Danger button")) Text="Log Out"
-                      ButtonStyle="ButtonStyle.Danger" />
+        <a href="/login">
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Danger button")) Text="Log Out"
+                          ButtonStyle="ButtonStyle.Danger" />
+        </a>
     </RadzenText>
 </div>
 

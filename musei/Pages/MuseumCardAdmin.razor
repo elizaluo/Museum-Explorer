@@ -8,11 +8,12 @@
 <RadzenCard>
     <div class="flexRow">
         <div class="leftAlign">
-            <img src=@ImagePath />
-
-            <div>
-                <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
-            </div>
+            <a href="/museum">
+                <img src=@ImagePath />
+            </a>
+            <h4>
+                <RadzenLink Style="color: black" Text=@MuseumName Path="/museum"/>
+            </h4>
 
             <div>
                 <div class="flexRow">
@@ -25,18 +26,13 @@
                 </div>
 
             </div>
+            <a href="/newevent">
+                <RadzenButton Variant="Variant.Flat" Text="Add" ButtonStyle="ButtonStyle.Danger" />
+            </a>
 
-            <RadzenButton Variant="Variant.Flat" Path="/newevent" Text="Add" ButtonStyle="ButtonStyle.Danger" />
 
-        </div>
-        <div class="rightAlign">
-            <RadzenPanelMenuItem Text=">" Path="/museum" Style="font-size: 50px; font-weight: bold">
-
-            </RadzenPanelMenuItem>
-        </div>
+</div>
     </div>
-
-
 </RadzenCard>
 
 @code {
@@ -52,17 +48,4 @@
     [Parameter]
     public string ImagePath { get; set; }
 
-    private string buttonStatus = "Follow";
-
-    void OnClick(string buttonName)
-    {
-        if (buttonStatus == "Follow")
-        {
-            buttonStatus = "Unfollow";
-        }
-        else
-        {
-            buttonStatus = "Follow";
-        }
-    }
 }
