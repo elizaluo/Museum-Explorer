@@ -1,5 +1,6 @@
 ﻿@page "/payment"
 @using Radzen
+@inject NavigationManager NavigationManager
 
 <style>
     .flexRow {
@@ -63,7 +64,7 @@
     <RadzenAutoComplete Placeholder="Security code" Style="width: 100%;" />
     <RadzenAutoComplete Placeholder="Zip code" Style="width: 100%;" />
 </RadzenCard>
-<RadzenButton class="mainColor" Style="width: 100%;" Text="Pay now" />
+<RadzenButton Click=@(args => OnPayNow("pay now")) class="mainColor" Style="width: 100%;" Text="Pay now" />
 
 
 @code {
@@ -78,4 +79,9 @@
 
     [Parameter]
     public int Total { get; set; }
+
+    void OnPayNow(string buttonName)
+    {
+        NavigationManager.NavigateTo("/bookconfirm");
+    }
 }

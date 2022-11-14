@@ -3,6 +3,7 @@
 @using Radzen
 @using Microsoft.Maui.Graphics
 @using System.Text.Json
+@inject NavigationManager NavigationManager
 
 <br />
 
@@ -27,7 +28,7 @@
     <RadzenButton Text="+Add Person" class="align-items-center" Click=@Add/>
 </RadzenCard>
 <RadzenCard class="row align-items-center">
-    <RadzenButton Text="Next" class="align-items-center" />
+    <RadzenButton Click=@(args => OnNext("next -> payment")) Text="Next" class="align-items-center" />
 </RadzenCard>
 
 @code {
@@ -37,5 +38,9 @@
     void Add()
     {
         totalPeople++;
+                                
+    void OnNext(string buttonName)
+    {
+        NavigationManager.NavigateTo("/payment");
     }
 }
