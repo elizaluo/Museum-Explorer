@@ -1,6 +1,8 @@
 ﻿@page "/account"
 @using Radzen
 @using Microsoft.Maui.Graphics
+@inject NavigationManager NavigationManager
+
 
 <br />
 
@@ -10,16 +12,12 @@
 
 <div class="flexRow" style="justify-content:space-evenly">
     <RadzenText TextAlign="TextAlign.Left">
-        <a href="/changepassword">
-            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Danger button")) Text="Reset Password"
-                          ButtonStyle="ButtonStyle.Danger" />
-        </a>
+        <RadzenButton Variant="Variant.Flat" Click=@(args => OnResetPassword("reset password")) Text="Reset Password"
+                      ButtonStyle="ButtonStyle.Danger" />
     </RadzenText>
     <RadzenText TextAlign="TextAlign.Right">
-        <a href="/login">
-            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Danger button")) Text="Log Out"
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnLogout("logging out")) Text="Log Out"
                           ButtonStyle="ButtonStyle.Danger" />
-        </a>
     </RadzenText>
 </div>
 
@@ -52,8 +50,13 @@
 </RadzenCard>
 
 @code{
-    void OnClick(string buttonName)
+    void OnResetPassword(string buttonName)
     {
+        NavigationManager.NavigateTo("/changepassword");
+    }
 
+    void OnLogout(string buttonName)
+    {
+        NavigationManager.NavigateTo("/login");
     }
 }
