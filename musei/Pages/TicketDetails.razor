@@ -12,21 +12,30 @@
 <h6>at {Time}</h6>
 <br />
 
-<RadzenCard>
-    <h5>Person 1</h5>
-    <RadzenTextBox Placeholder="Name" Class="w-100" />
-    <RadzenTextBox Placeholder="Email" Class="w-100" />
-    <RadzenTextArea Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" />
-</RadzenCard>
-<RadzenCard>
-    <h5>Person 2 (optional)</h5>
-    <RadzenTextBox Placeholder="Name" Class="w-100" />
-    <RadzenTextBox Placeholder="Email" Class="w-100" />
-    <RadzenTextArea Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" />
-</RadzenCard>
+@while (count <= totalPeople)
+{
+    <PersonCard Count=@count/>
+    count++;
+}
+
+@if (count > totalPeople)
+{
+    count = 1;
+}
+
 <RadzenCard class="row align-items-center">
-    <RadzenButton Text="+Add Person" class="align-items-center" />
+    <RadzenButton Text="+Add Person" class="align-items-center" Click=@Add/>
 </RadzenCard>
 <RadzenCard class="row align-items-center">
     <RadzenButton Text="Next" class="align-items-center" />
 </RadzenCard>
+
+@code {
+    int totalPeople = 1;
+    int count = 1;
+
+    void Add()
+    {
+        totalPeople++;
+    }
+}
