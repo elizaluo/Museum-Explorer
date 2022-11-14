@@ -1,5 +1,6 @@
 ﻿@using Radzen
 @page "/login"
+@inject NavigationManager NavigationManager
 
 
 <br />
@@ -41,11 +42,11 @@
 
     void OnRegister(string name)
     {
-        //console.Log($"{name} -> Register");
+        NavigationManager.NavigateTo("/signup");
     }
 
     void OnResetPassword(string value, string name)
     {
-        //console.Log($"{name} -> ResetPassword for user: {value}");
+        NavigationManager.NavigateTo("/forgotpassword");
     }
 }

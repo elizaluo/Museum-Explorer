@@ -19,7 +19,8 @@
                     </div>
                 </div>
                 <div class="flexRow">
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
+                    @*<RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@MuseumName</RadzenText>*@
+                    <RadzenLink Style="color: black" Text=@MuseumName Path="/museum"/>
                     <div class="flexRow rightAlign">
                         <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@EventTime</RadzenText>
                         <RadzenIcon Icon="alarm" />
