@@ -16,19 +16,19 @@
 
 @foreach (var person in _people)
 {
-    <PersonCard Count=@count />
+    <PersonCard Count=1 />
 }
 
+<!--
 <RadzenCard class="row align-items-center">
     <RadzenButton Text="+Add Person" class="align-items-center" Click=@Add/>
 </RadzenCard>
 <RadzenCard class="row align-items-center">
     <RadzenButton Click=@(args => OnNext("next -> payment")) Text="Next" class="align-items-center" />
 </RadzenCard>
+-->
 
 @code {
-
-    int count = 1;
 
     List<Person> _people = new List<Person>()
     {
@@ -38,7 +38,6 @@
     void Add()
     {
         _people.Add(new Person());
-        count++;
     }
 
     void OnNext(string buttonName)
