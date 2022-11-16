@@ -71,8 +71,8 @@
         try
         {
             using CosmosClient client = new(
-            accountEndpoint: "https://musei.documents.azure.com:443/",
-            authKeyOrResourceToken: "miTYBSfZFrqjbyMTS3iPQ0ZBp13a0EgbSjKpfkvj0M5h06RUlWrEBkMv0tkK4hiVbypV5WiKsqYCACDbAQRACQ=="
+                accountEndpoint: Environment.GetEnvironmentVariable("COSMOS_ENDPOINT")!,
+                authKeyOrResourceToken: Environment.GetEnvironmentVariable("COSMOS_KEY")!
             );
             Database db = await client.CreateDatabaseIfNotExistsAsync(
                 id: "musei"
