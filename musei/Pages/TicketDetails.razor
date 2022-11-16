@@ -1,4 +1,5 @@
 ﻿@page "/ticketdetails"
+@using musei.Data
 
 @using Radzen
 @using Microsoft.Maui.Graphics
@@ -13,15 +14,9 @@
 <h6>at {Time}</h6>
 <br />
 
-@while (count <= totalPeople)
+@foreach (var person in _people)
 {
-    <PersonCard Count=@count/>
-    count++;
-}
-
-@if (count > totalPeople)
-{
-    count = 1;
+    <PersonCard Count=@count />
 }
 
 <RadzenCard class="row align-items-center">
@@ -32,16 +27,23 @@
 </RadzenCard>
 
 @code {
-    int totalPeople = 1;
+
     int count = 1;
+
+    List<Person> _people = new List<Person>()
+    {
+        new Person(){ }
+    };
 
     void Add()
     {
-        totalPeople++;
+        _people.Add(new Person());
+        count++;
     }
-                                
+
     void OnNext(string buttonName)
     {
         NavigationManager.NavigateTo("/payment");
     }
+
 }

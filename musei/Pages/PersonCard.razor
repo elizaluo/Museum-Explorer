@@ -7,12 +7,20 @@
 
 <RadzenCard>
     <h5>Person @Count</h5>
-    <RadzenTextBox Placeholder="Name" Class="w-100" />
-    <RadzenTextBox Placeholder="Email" Class="w-100" />
-    <RadzenTextArea Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" />
+    <RadzenTextBox Placeholder="Name" Class="w-100" Value=@name/>
+    <RadzenTextBox Placeholder="Email" Class="w-100" Value=@emailAddress />
+    <RadzenTextArea Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" Value="@optionalSpecialAccomodations"/>
 </RadzenCard>
 
 @code {
+    public int Count;
+
     [Parameter]
-    public int Count { get; set; }
+    public String name { get; set; }
+
+    [Parameter]
+    public String emailAddress { get; set; }
+
+    [Parameter]
+    public String optionalSpecialAccomodations { get; set; }
 }
