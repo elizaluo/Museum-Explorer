@@ -16,19 +16,26 @@
 
 @foreach (var person in _people)
 {
-    <PersonCard Count=1 />
+    <PersonCard Count=@count name=@name emailAddress=@emailAddress optionalSpecialAccomodations=@optionalSpecialAccomodations/>
+    person.setName(@name);
+    person.setEmailAddress(@emailAddress);
+    person.setOptionalSpecialAccomodations(@optionalSpecialAccomodations);
+    count++;
 }
 
-<!--
 <RadzenCard class="row align-items-center">
-    <RadzenButton Text="+Add Person" class="align-items-center" Click=@Add/>
+    <RadzenButton Text="+Add Person" class="align-items-center" Click=@Add />
 </RadzenCard>
 <RadzenCard class="row align-items-center">
     <RadzenButton Click=@(args => OnNext("next -> payment")) Text="Next" class="align-items-center" />
 </RadzenCard>
--->
 
 @code {
+
+    int count = 1;
+    String name;
+    String emailAddress;
+    String optionalSpecialAccomodations;
 
     List<Person> _people = new List<Person>()
     {
@@ -38,10 +45,12 @@
     void Add()
     {
         _people.Add(new Person());
+        count = 1;
     }
 
     void OnNext(string buttonName)
     {
+        Console.WriteLine(_people);
         NavigationManager.NavigateTo("/payment");
     }
 
