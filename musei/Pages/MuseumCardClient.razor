@@ -1,4 +1,8 @@
 ﻿@page "/museumcardclient"
+@inject NavigationManager NavManager
+@inject NavigationManager NavigationManager
+@using musei.Pages
+
 
 @using Radzen
 @using Microsoft.Maui.Graphics
@@ -8,26 +12,13 @@
 <RadzenCard>
     <div class="flexRow">
         <div class="leftAlign">
-            <a href="/museum">
+            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@MuseumName">
                 <img src=@ImagePath />
-            </a>
-            <h4>
-                <RadzenLink Style="color: black" Text=@MuseumName Path="/museum"/>
-            </h4>
-
-            <div>
-                <div class="flexRow">
-                    <RadzenIcon Icon="account_balance" />
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@Address</RadzenText>
-                </div>
-                <div class="flexRow">
-                    <RadzenIcon Icon="event" />
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@OpeningHours</RadzenText>
-                </div>
-
-            </div>
-
-            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Danger button")) Text=@buttonStatus ButtonStyle="ButtonStyle.Danger" />
+            </RadzenButton>
+            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@MuseumName" Size="ButtonSize.Large" />
+            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMap("Large button")) Text="@Address" Icon="account_balance" />
+            <RadzenButton Variant="Variant.Text" Text="@OpeningHours" Icon="event" />
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickFollow("Danger button")) Text=@buttonStatus ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Medium" />
 
         </div>
     </div>
@@ -48,7 +39,7 @@
 
     private string buttonStatus = "Follow";
 
-    void OnClick(string buttonName)
+    void OnClickFollow(string buttonName)
     {
         if (buttonStatus == "Follow")
         {
@@ -59,4 +50,13 @@
             buttonStatus = "Follow";
         }
     }
+    void OnClickMap(string buttonName)
+    {
+    }
+    async void OnClickEvent(string buttonName)
+    {
+        //NavigationManager.NavigateTo("//museum");
+        await App.Current.MainPage.Navigation.PushAsync(new xMuseumPage());
+    }
 }
+
