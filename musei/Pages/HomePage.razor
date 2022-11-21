@@ -3,7 +3,6 @@
 @using Radzen
 @using musei.Data
 @using musei.Pages
-
 @using System.Text.Json
 @using Microsoft.Azure.Cosmos;
 
@@ -45,7 +44,6 @@
     {
         await DatabaseController.getAllEvents();
         events = DatabaseController.events;
-     
 
     }
 }
