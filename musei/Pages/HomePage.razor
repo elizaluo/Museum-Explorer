@@ -2,6 +2,7 @@
 
 @using Radzen
 @using musei.Data
+@using musei.Pages
 @using System.Text.Json
 @using Microsoft.Azure.Cosmos;
 
@@ -16,101 +17,34 @@
 
 <br />
 <h3>Events and News</h3>
-<p>x = @jsonString</p>
+
 <div class="eventNewsList">
-    <EventCard EventName="Dino Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
-    <EventCard EventName="Other Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
-    <EventCard EventName="Mummy Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
-    <EventCard EventName="Rome Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
+    @foreach (Event e in @events)
+    {
+        <EventCard EventName=@e.name MuseumName=@e.museum.ToString() Date=@e.startTime.ToShortDateString() Time=@e.startTime.ToShortTimeString() ImagePath="Images/randmuseum.png" Body=@e.description />
+
+    }
 </div>
 
 @code {
     static String bodyTextFiller = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-    string jsonString = "";
-    static Event event1 = new Event
-    {
-        id = "1",
-        name = "Event1",
-        museum = 1,
-        startTime = new DateTime(2022, 11, 17, 15, 30, 0),
-        description = bodyTextFiller,
-    };
+    List<Event> events = new List<Event>();
+    //static Event event1 = new Event
+    //{
+    //    id = "1",
+    //    name = "Event1",
+    //    museum = 1,
+    //    startTime = new DateTime(2022, 11, 17, 15, 30, 0),
+    //    description = bodyTextFiller,
+    //};
 
-    static Event event2 = new Event
-    {
-        id = "2",
-        name = "Event2",
-        museum = 2,
-        startTime = new DateTime(2022, 11, 18, 15, 30, 0),
-        description = bodyTextFiller,
-    };
-
-    static Event event3 = new Event
-    {
-        id = "3",
-        name = "Event3",
-        museum = 3,
-        startTime = new DateTime(2022, 11, 19, 15, 30, 0),
-        description = bodyTextFiller,
-    };
-    static Event event4 = new Event
-    {
-        id = "4",
-        name = "Event4",
-        museum = 3,
-        startTime = new DateTime(2022, 11, 19, 15, 30, 0),
-        description = bodyTextFiller,
-    };
-
-    List<Event> events = new List<Event> { event1, event2 };
+    //List<Event> events = new List<Event> { event1, event2 };
 
     protected override async Task OnInitializedAsync()
     {
-        //jsonString = JsonSerializer.Serialize(events);
-        //System.Diagnostics.Debug.WriteLine(jsonString);
-        try
-        {
-            using CosmosClient client = new(
-                accountEndpoint: Environment.GetEnvironmentVariable("COSMOS_ENDPOINT")!,
-                authKeyOrResourceToken: Environment.GetEnvironmentVariable("COSMOS_KEY")!
-            );
-            Database db = await client.CreateDatabaseIfNotExistsAsync(
-                id: "musei"
-            );
-            Container eventCont = await db.CreateContainerIfNotExistsAsync(
-                id: "events",
-                partitionKeyPath: "/museum",
-                throughput: 400
-            );
-            Container museumCont = await db.CreateContainerIfNotExistsAsync(
-                id: "museum",
-                partitionKeyPath: "/name",
-                throughput: 400
-            );
-
-            //Event createdItem = await eventCont.CreateItemAsync<Event>(
-            //    item: event4
-            //);
-
-            var query = new QueryDefinition(query: "SELECT * FROM Events");
-            using FeedIterator<Event> feed = eventCont.GetItemQueryIterator<Event>(
-            queryDefinition: query
-            );
-
-            while (feed.HasMoreResults)
-            {
-                FeedResponse<Event> response = await feed.ReadNextAsync();
-                foreach (Event e in response)
-                {
-                    jsonString += e.name;
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            jsonString = e.Message;
-        }
-
+        await DatabaseController.getAllEvents();
+        events = DatabaseController.events;
+     
     }
 }
 

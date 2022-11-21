@@ -35,6 +35,9 @@
       <EnableCodeSigning>False</EnableCodeSigning>
       <CreatePackage>false</CreatePackage>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
     <ItemGroup>
         <!-- Splash Screen -->
         <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
