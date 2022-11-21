@@ -10,7 +10,7 @@ namespace musei.Data
         public string name { get; set; }
 
         [JsonProperty(PropertyName = "museum")]
-        public int museum { get; set; }
+        public string museum { get; set; }
 
         public DateTime startTime { get; set; }
 

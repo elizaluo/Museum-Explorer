@@ -1,15 +1,20 @@
 ﻿using System;
+using Newtonsoft.Json;
+
 namespace musei.Data
 {
 	public class Museum
 	{
-        public string Name { get; set; }
+        public string id { get; set; }
 
-        public string Address { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string name { get; set; }
 
-        public List<Event> events { get; set; }
+        public string address { get; set; }
 
+        public string hours { get; set; }
 
+        public List<string> events { get; set; }
     }
 }
 
