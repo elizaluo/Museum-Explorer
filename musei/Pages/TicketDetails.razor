@@ -16,11 +16,11 @@
 
 @foreach (var person in _people)
 {
-    <PersonCard Count=@count name=@name emailAddress=@emailAddress optionalSpecialAccomodations=@optionalSpecialAccomodations/>
-    person.setName(@name);
-    person.setEmailAddress(@emailAddress);
-    person.setOptionalSpecialAccomodations(@optionalSpecialAccomodations);
-    count++;
+    <h5>Person @person.count</h5>
+    <RadzenTextBox Placeholder="Name" Class="w-100" @bind-Value=@person.name />
+    <RadzenTextBox Placeholder="Email" Class="w-100" @bind-Value=person.emailAddress />
+    <RadzenTextArea Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" @bind-Value=@person.optionalSpecialAccomodations />
+    System.Diagnostics.Debug.WriteLine(person);
 }
 
 <RadzenCard class="row align-items-center">
@@ -31,21 +31,14 @@
 </RadzenCard>
 
 @code {
-
-    int count = 1;
-    String name;
-    String emailAddress;
-    String optionalSpecialAccomodations;
-
     List<Person> _people = new List<Person>()
     {
-        new Person(){ }
+        new Person(1){ }
     };
 
     void Add()
     {
-        _people.Add(new Person());
-        count = 1;
+        _people.Add(new Person(_people.Count+1));
     }
 
     void OnNext(string buttonName)
@@ -53,5 +46,4 @@
         Console.WriteLine(_people);
         NavigationManager.NavigateTo("/payment");
     }
-
 }
