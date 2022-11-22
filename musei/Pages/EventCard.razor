@@ -31,21 +31,24 @@
 </style>
 
 <RadzenCard class="flexColumn">
-    <img src=@ImagePath />
-        <div class="flexRow">
-            <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left">@EventName</RadzenText>
-            <div class="textIcon">
-                <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Date</RadzenText>
-                <RadzenIcon Icon="schedule" />
-            </div>
+    <div class="flexRow">
+        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@EventName">
+            <img src=@ImagePath />
+        </RadzenButton>
+        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@EventName" Size="ButtonSize.Large" />
+
+        <div class="textIcon">
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Date</RadzenText>
+            <RadzenIcon Icon="schedule" />
         </div>
-        <div class="flexRow">
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
-            <div class="textIcon">
-                <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Time</RadzenText>
-                <RadzenIcon Icon="event" />
-            </div>
+    </div>
+    <div class="flexRow">
+        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
+        <div class="textIcon">
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Time</RadzenText>
+            <RadzenIcon Icon="event" />
         </div>
+    </div>
 
     <div>@Body</div>
 
@@ -70,5 +73,11 @@
 
     [Parameter]
     public string ImagePath { get; set; }
+
+    async void OnClickEvent(string buttonName)
+    {
+        //NavigationManager.NavigateTo("//museum");
+        await App.Current.MainPage.Navigation.PushAsync(new xEventPage());
+    }
 }
 

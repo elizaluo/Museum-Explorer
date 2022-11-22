@@ -66,4 +66,12 @@
     <ItemGroup>
       <Folder Include="wwwroot\Images\" />
     </ItemGroup>
+    <ItemGroup>
+      <MauiXaml Update="Pages\EventPage.xaml">
+        <SubType></SubType>
+      </MauiXaml>
+      <MauiXaml Update="Pages\xBookingConfirmation.xaml">
+        <SubType></SubType>
+      </MauiXaml>
+    </ItemGroup>
 </Project>

@@ -80,8 +80,8 @@
     [Parameter]
     public int Total { get; set; }
 
-    void OnPayNow(string buttonName)
+    async void OnPayNow(string buttonName)
     {
-        NavigationManager.NavigateTo("/bookconfirm");
+        await App.Current.MainPage.Navigation.PushAsync(new xBookingConfirmation());
     }
 }

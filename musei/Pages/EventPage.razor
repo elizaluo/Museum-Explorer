@@ -58,9 +58,7 @@
         </div>
         <div>@Body</div>
     </RadzenCard>
-    <a href="/ticketdetails">
-        <RadzenButton class="mainColor" Style="width: 100%;" Text="Register" />
-    </a>
+    <RadzenButton class="mainColor" Click=@(args => OnClick("Large button")) Style="width: 100%;" Text="Register" />
     
 </div>
 
@@ -83,5 +81,10 @@
 
     [Parameter]
     public string ImagePath { get; set; } = "Images/randmuseum.png";
+
+    async void OnClick(string buttonName)
+    {
+        await App.Current.MainPage.Navigation.PushAsync(new xPayment());
+    }
 }
 

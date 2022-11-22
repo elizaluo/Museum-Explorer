@@ -16,8 +16,8 @@
 @while (count <= totalPeople)
 {
     <PersonCard Count=@count/>
-    count++;
-}
+        count++;
+    }
 
 @if (count > totalPeople)
 {
@@ -32,16 +32,17 @@
 </RadzenCard>
 
 @code {
-    int totalPeople = 1;
-    int count = 1;
+        int totalPeople = 1;
+        int count = 1;
 
-    void Add()
-    {
-        totalPeople++;
+        void Add()
+        {
+            totalPeople++;
+        }
+
+        async void OnNext(string buttonName)
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new xPayment());
+        }
+
     }
-                                
-    void OnNext(string buttonName)
-    {
-        NavigationManager.NavigateTo("/payment");
-    }
-}
