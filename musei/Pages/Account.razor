@@ -50,13 +50,13 @@
 </RadzenCard>
 
 @code{
-    void OnResetPassword(string buttonName)
+    async void OnResetPassword(string buttonName)
     {
-        NavigationManager.NavigateTo("/changepassword");
+        await App.Current.MainPage.Navigation.PushAsync(new xChangePassword());
     }
 
-    void OnLogout(string buttonName)
+    async void OnLogout(string buttonName)
     {
-        NavigationManager.NavigateTo("/login");
+        await App.Current.MainPage.Navigation.PushAsync(new xLogIn());
     }
 }

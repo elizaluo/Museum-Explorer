@@ -73,5 +73,17 @@
       <MauiXaml Update="Pages\xBookingConfirmation.xaml">
         <SubType></SubType>
       </MauiXaml>
+      <MauiXaml Update="Pages\xLogIn.xaml">
+        <SubType></SubType>
+      </MauiXaml>
+      <MauiXaml Update="Pages\xForgotPassword.xaml">
+        <SubType></SubType>
+      </MauiXaml>
+      <MauiXaml Update="Pages\xSignUp.xaml">
+        <SubType></SubType>
+      </MauiXaml>
+      <MauiXaml Update="Pages\xChangePassword.xaml">
+        <SubType></SubType>
+      </MauiXaml>
     </ItemGroup>
 </Project>

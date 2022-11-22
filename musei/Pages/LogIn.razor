@@ -40,13 +40,13 @@
         //console.Log($"{name} -> Username: {args.Username}, password: {args.Password}");
     }
 
-    void OnRegister(string name)
+    async void OnRegister(string name)
     {
-        NavigationManager.NavigateTo("/signup");
+        await App.Current.MainPage.Navigation.PushAsync(new xSignUp());
     }
 
-    void OnResetPassword(string value, string name)
+    async void OnResetPassword(string value, string name)
     {
-        NavigationManager.NavigateTo("/forgotpassword");
+        await App.Current.MainPage.Navigation.PushAsync(new xForgotPassword());
     }
 }
