@@ -1,4 +1,5 @@
 ﻿@page "/ticketdetails"
+@using musei.Data
 
 @using Radzen
 @using Microsoft.Maui.Graphics
@@ -13,36 +14,36 @@
 <h6>at {Time}</h6>
 <br />
 
-@while (count <= totalPeople)
+@foreach (var person in _people)
 {
-    <PersonCard Count=@count/>
-        count++;
-    }
-
-@if (count > totalPeople)
-{
-    count = 1;
+    <h5>Person @person.count</h5>
+    <RadzenTextBox Placeholder="Name" Class="w-100" @bind-Value=@person.name />
+    <RadzenTextBox Placeholder="Email" Class="w-100" @bind-Value=person.emailAddress />
+    <RadzenTextArea Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" @bind-Value=@person.optionalSpecialAccomodations />
+    System.Diagnostics.Debug.WriteLine(person);
 }
 
 <RadzenCard class="row align-items-center">
-    <RadzenButton Text="+Add Person" class="align-items-center" Click=@Add/>
+    <RadzenButton Text="+Add Person" class="align-items-center" Click=@Add />
 </RadzenCard>
 <RadzenCard class="row align-items-center">
     <RadzenButton Click=@(args => OnNext("next -> payment")) Text="Next" class="align-items-center" />
 </RadzenCard>
 
 @code {
-        int totalPeople = 1;
-        int count = 1;
+    List<Person> _people = new List<Person>()
+    {
+        new Person(1){ }
+    };
 
-        void Add()
-        {
-            totalPeople++;
-        }
-
-        async void OnNext(string buttonName)
-        {
-            await App.Current.MainPage.Navigation.PushAsync(new xPayment());
-        }
-
+    void Add()
+    {
+        _people.Add(new Person(_people.Count+1));
     }
+
+    void OnNext(string buttonName)
+    {
+        Console.WriteLine(_people);
+        NavigationManager.NavigateTo("/payment");
+    }
+}
