@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,24 +6,31 @@ using System.Threading.Tasks;
 
 namespace musei.Data
 {
-    public class PersonCard
+    public class Person
     {
-        private String name;
-        private String emailAddress;
-        private String optionalSpecialAccomodations;
-        public PersonCard(String name, String emailAddress, String optionalSpecialAccomodations)
+        public int count;
+        public string name;
+        public string emailAddress;
+        public string optionalSpecialAccomodations;
+        public Person(int count, string name, string emailAddress, string optionalSpecialAccomodations)
         {
+            this.count = count;
             this.name = name;
             this.emailAddress = emailAddress;
             this.optionalSpecialAccomodations = optionalSpecialAccomodations;
         }
 
-        public String getName() { return name; }
-        public String getEmailAddress() { return emailAddress; }
-        public String getOptionalSpecialAccomodations() { return optionalSpecialAccomodations; }
+        public Person (int count)
+        {
+            this.count = count;
+            this.name = null;
+            this.emailAddress=null;
+            this.optionalSpecialAccomodations = null;
+        }
 
-        public void setName(String name) { this.name = name; }
-        public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
-        public void setOptionalSpecialAccomodations(String optionalSpecialAccomodations) { this.optionalSpecialAccomodations = optionalSpecialAccomodations; }
+        public override string ToString() 
+        { 
+            return "PERSON-> Name: " + this.name + "; Email Address: " + this.emailAddress + "; Special Accomodations (Optional): " + this.optionalSpecialAccomodations + "\n";
+        }
     }
 }
