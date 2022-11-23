@@ -3,7 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:musei.Pages"
              x:Class="musei.xBookingConfirmation"
-             Title="Booking Confirmation">
+             Title="Booking Confirmation"
+             NavigationPage.HasBackButton="False">
+    <NavigationPage.TitleView>
+        <Button Text="Done"
+                HorizontalOptions="End"
+                Clicked="OnButtonClicked" />
+    </NavigationPage.TitleView>
     <BlazorWebView HostPage="wwwroot/index.html">
         <BlazorWebView.RootComponents>
             <RootComponent Selector="#app" ComponentType="{x:Type local:BookingConfirmation}" />
