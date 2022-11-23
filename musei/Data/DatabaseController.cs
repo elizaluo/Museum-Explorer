@@ -49,7 +49,7 @@ namespace musei.Data
         {
             Container eventCont = getEventsContainer();
 
-            var query = new QueryDefinition(query: "SELECT * FROM Events");
+            var query = new QueryDefinition(query: "SELECT * FROM events");
 
             using FeedIterator<Event> feed = eventCont.GetItemQueryIterator<Event>(
                 queryDefinition: query
@@ -63,7 +63,6 @@ namespace musei.Data
                     events.Add(e.id, e);
                 }
             }
-
         }
 
         public static async Task getAllMuseums()
@@ -85,8 +84,42 @@ namespace musei.Data
                     museums.Add(m.id, m);
                 }
             }
+        }
 
-        }       
+        public static async Task createEvent(Event e)
+        {
+            try
+            {
+                //Container eventCont = getEventsContainer();
+                Container eventCont = await db.CreateContainerIfNotExistsAsync(
+                    id: "events",
+                    partitionKeyPath: "/museum",
+                    throughput: 400
+                );
+
+                Event createdEvent = await eventCont.CreateItemAsync<Event>(item: e);
+            }
+            catch (Exception exc)
+            {
+                Console.Write("\n\n\n" + exc.Message + "\n\n\n");
+            }
+        }
+
+        public static async Task createMuseum(Museum m)
+        {
+            try
+            {
+                Container museumCont = getMuseumsContainer();
+
+                Museum createdMuseum = await museumCont.CreateItemAsync<Museum>(item: m);
+            }
+            catch (Exception exc)
+            {
+                Console.Write("\n\n\n" + exc.Message + "\n\n\n");
+            }
+        }
+
+        
     }
 }
 

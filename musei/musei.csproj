@@ -60,6 +60,32 @@
       <None Remove="Resources\Images\dotnet_bot.svg" />
     </ItemGroup>
     <ItemGroup>
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon20x20%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon20x20%403x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon29x29%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon29x29%403x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon40x40%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon40x40%403x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon60x60%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon60x60%403x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon76x76%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appicon83.5x83.5%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\appiconItunesArtwork.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\actool\cloned-assets\Assets.xcassets\appicon.appiconset\Contents.json" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon20x20%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon20x20%403x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon29x29%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon29x29%403x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon40x40%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon40x40%403x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon60x60%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon60x60%403x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon76x76%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon83.5x83.5%402x.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appiconItunesArtwork.png" />
+      <BundleResource Remove="bin\Debug\net6.0-maccatalyst\maccatalyst-x64\musei.app\Contents\Resources\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\Contents.json" />
+    </ItemGroup>
+    <ItemGroup>
       <BundleResource Include="wwwroot\Images\randmuseum.png" />
       <BundleResource Include="wwwroot\Images\check.png" />
       <BundleResource Include="**/*" />
@@ -110,5 +136,31 @@
       <MauiXaml Update="Pages\xTicketDetails.xaml">
         <SubType></SubType>
       </MauiXaml>
+    </ItemGroup>
+</Project>
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
+      <ImageAsset Include="**/*" />
     </ItemGroup>
 </Project>
