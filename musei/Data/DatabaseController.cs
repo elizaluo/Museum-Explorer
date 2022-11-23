@@ -86,18 +86,13 @@ namespace musei.Data
             }
         }
 
-        public static async Task createEvent(Event e)
+        public static async Task createUpdateEvent(Event e)
         {
             try
             {
-                //Container eventCont = getEventsContainer();
-                Container eventCont = await db.CreateContainerIfNotExistsAsync(
-                    id: "events",
-                    partitionKeyPath: "/museum",
-                    throughput: 400
-                );
+                Container eventCont = getEventsContainer();
 
-                Event createdEvent = await eventCont.CreateItemAsync<Event>(item: e);
+                Event createdEvent = await eventCont.UpsertItemAsync<Event>(item: e);
             }
             catch (Exception exc)
             {
@@ -105,13 +100,13 @@ namespace musei.Data
             }
         }
 
-        public static async Task createMuseum(Museum m)
+        public static async Task createUpdateMuseum(Museum m)
         {
             try
             {
                 Container museumCont = getMuseumsContainer();
 
-                Museum createdMuseum = await museumCont.CreateItemAsync<Museum>(item: m);
+                Museum createdMuseum = await museumCont.UpsertItemAsync<Museum>(item: m);
             }
             catch (Exception exc)
             {
