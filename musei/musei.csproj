@@ -85,5 +85,8 @@
       <MauiXaml Update="Pages\xChangePassword.xaml">
         <SubType></SubType>
       </MauiXaml>
+      <MauiXaml Update="Pages\xTicketDetails.xaml">
+        <SubType></SubType>
+      </MauiXaml>
     </ItemGroup>
 </Project>

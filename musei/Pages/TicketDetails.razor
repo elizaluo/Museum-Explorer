@@ -41,9 +41,9 @@
         _people.Add(new Person(_people.Count+1));
     }
 
-    void OnNext(string buttonName)
+    async void OnNext(string buttonName)
     {
         Console.WriteLine(_people);
-        NavigationManager.NavigateTo("/payment");
+        await App.Current.MainPage.Navigation.PushAsync(new xPayment());
     }
 }
