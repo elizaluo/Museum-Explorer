@@ -20,16 +20,16 @@ namespace musei.Data
             this.optionalSpecialAccomodations = optionalSpecialAccomodations;
         }
 
-        public Person (int count)
+        public Person(int count)
         {
             this.count = count;
             this.name = null;
-            this.emailAddress=null;
+            this.emailAddress = null;
             this.optionalSpecialAccomodations = null;
         }
 
-        public override string ToString() 
-        { 
+        public override string ToString()
+        {
             return "PERSON-> Name: " + this.name + "; Email Address: " + this.emailAddress + "; Special Accomodations (Optional): " + this.optionalSpecialAccomodations + "\n";
         }
     }

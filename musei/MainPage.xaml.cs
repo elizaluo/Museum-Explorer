@@ -1,4 +1,5 @@
 ﻿namespace musei;
+using Microsoft.Azure.Cosmos;
 
 public partial class MainPage : TabbedPage
 {
@@ -7,3 +8,4 @@ public partial class MainPage : TabbedPage
 		InitializeComponent();
 	}
 }
+

@@ -1,6 +1,10 @@
 ﻿@page "/"
 
 @using Radzen
+@using musei.Data
+@using musei.Pages
+@using System.Text.Json
+@using Microsoft.Azure.Cosmos;
 
 <style>
     .eventNewsList {
@@ -10,18 +14,26 @@
     }
 </style>
 
-
 <br />
 <h3>Events and News</h3>
+
 <div class="eventNewsList">
-    <EventCard EventName="Dino Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
-    <EventCard EventName="Other Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
-    <EventCard EventName="Mummy Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
-    <EventCard EventName="Rome Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
+    @foreach (Event e in @events.Values)
+    {
+        <EventCard EventName=@e.name MuseumName=@museums[e.museum].name Date=@e.startTime.ToShortDateString() Time=@e.startTime.ToShortTimeString() ImagePath="Images/randmuseum.png" Body=@e.description />
+    }
 </div>
 
 @code {
-    String bodyTextFiller = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+    Dictionary<string, Event> events = new Dictionary<string, Event>();
+    Dictionary<string, Museum> museums = new Dictionary<string, Museum>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        await DatabaseController.getAllEvents();
+        await DatabaseController.getAllMuseums();
+
+        events = DatabaseController.events;
+        museums = DatabaseController.museums;
+    }
 }
-
