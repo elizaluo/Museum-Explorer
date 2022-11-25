@@ -16,11 +16,13 @@
 </style>
 
 <br />
-<h3>Events and News2</h3>
-
 <div class="eventNewsList">
 
-    @if (cs.events.Count > 0)
+    @if (cs.events.Count == 0)
+    {
+        <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+    }
+    else
     {
         foreach (Event ev in cs.events.Values)
         {
@@ -34,6 +36,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await cs.GetMuseums();
         await cs.GetEvents();
     }
 }

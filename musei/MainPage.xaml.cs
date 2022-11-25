@@ -1,5 +1,4 @@
 ﻿namespace musei;
-using musei.Data;
 
 public partial class MainPage : TabbedPage
 {
