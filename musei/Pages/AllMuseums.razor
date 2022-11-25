@@ -4,21 +4,28 @@
 @inject CosmosService cs
 
 <br />
-<h3>All Museums</h3>
-<br />
 
 <div class="flexColumn">
     <div class="museumList">
-        <MuseumCardClient MuseumName="Museo de Roma" Address="Street 00" OpeningHours="M-S: 12:30 - 5:30" ImagePath="Images/randmuseum.png" />
-        <MuseumCardAdmin MuseumName="Musei in Commune" Address="Street 11" OpeningHours="M-S: 12:30 - 5:30" ImagePath="Images/randmuseum.png" />
-        @*@foreach (Museum m in db.museums.Values)
+        @if (cs.museums.Count == 0)
         {
-            <MuseumCardClient MuseumName=@m.name Address=@m.address OpeningHours=@m.hours ImagePath="Images/randmuseum.png" />
-        }*@
+            <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+        }
+        else
+        {
+            <MuseumCardAdmin MuseumName="Musei in Commune1" Address="Street 11" OpeningHours="M-S: 12:30 - 5:30" ImagePath="Images/randmuseum.png" />
+            @foreach (Museum mus in cs.museums.Values)
+            {
+                <MuseumCardClient m=mus/>
+            }
+        }
     </div>
 
 </div>
 
 @code {
-
+    protected override async Task OnInitializedAsync()
+    {
+        await cs.GetMuseums();
+    }
 }

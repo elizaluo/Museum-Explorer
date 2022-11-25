@@ -2,7 +2,6 @@
 
 @using Radzen
 @using musei.Data
-@using musei.Pages
 @using System.Text.Json
 @inject CosmosService cs
 
@@ -26,7 +25,7 @@
     {
         foreach (Event ev in cs.events.Values)
         {
-            <EventCard e=ev ImagePath="Images/randmuseum.png" />
+            <EventCard e=ev/>
         }
     }
 </div>

@@ -37,7 +37,6 @@
         <img src=@ImagePath />
     </RadzenButton>
     <div class="flexRow">
-        <div>count = @cs.museums.Count</div>
         <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent()) Text=@e.name Size="ButtonSize.Large" />
 
         <div class="textIcon">
@@ -57,21 +56,15 @@
 </RadzenCard>
 
 @code {
-    Dictionary<string, Museum> museums = new Dictionary<string, Museum>();
-
     [Parameter]
     public Event e { get; set; }
 
     [Parameter]
-    public string ImagePath { get; set; }
-
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    museums = await cs.GetMuseums();
-    //}
+    public string ImagePath { get; set; } = "Images/randmuseum.png";
 
     async void OnClickEvent()
     {
+        Session.currentEvent = e;
         await App.Current.MainPage.Navigation.PushAsync(new xEventPage());
     }
 }

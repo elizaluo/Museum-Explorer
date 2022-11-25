@@ -1,6 +1,7 @@
 ﻿@page "/museum"
 @using Radzen
-
+@using musei.Data
+@inject CosmosService cs
 
 <style>
     .flexColumn {
@@ -23,8 +24,9 @@
 </style>
 
 <br />
-
-<h3 style="text-align:center">'Museum Name'</h3>
+<img src=@ImagePath />
+<br />
+<h3 style="text-align:center">@Session.currentMuseum.name</h3>
 
 <br />
 
@@ -32,22 +34,26 @@
     <div class="flexRow">
         <div class="flexRow">
             <RadzenIcon Icon="place" />
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">Address</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Session.currentMuseum.address</RadzenText>
         </div>
         <div class="flexRow">
             <RadzenIcon Icon="schedule" />
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">M-F: 8 - 18<br />SAT: 10 - 16<br />SUN: Closed</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@Session.currentMuseum.hours</RadzenText>
         </div>
     </div>
+    <br />
+    <br />
+    <h4>Museum Events</h4>
     <div class="eventNewsList">
-        <EventCard EventName="Dino Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
-        <EventCard EventName="Other Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
-        <EventCard EventName="Mummy Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
-        <EventCard EventName="Rome Event" MuseumName="Dino Musuem" Date="11/11/11" Time="12:30 - 5:30" ImagePath="Images/randmuseum.png" Body=@bodyTextFiller />
+        @for (int i = 0; i < Session.currentMuseum.events.Count; i++)
+        {
+
+            <EventCard e=cs.events[Session.currentMuseum.events[i]] />
+        }
     </div>
 </div>
 
 @code {
-    String bodyTextFiller = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+    public string ImagePath { get; set; } = "Images/randmuseum.png";
 }
 
