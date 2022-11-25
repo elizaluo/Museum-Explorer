@@ -1,5 +1,7 @@
 ﻿@page "/event"
 @using Radzen
+@using musei.Data
+@inject CosmosService cs
 
 <style>
     .flexRow {
@@ -19,8 +21,8 @@
         margin-right: 0;
     }
 
-    .flexEnd {
-        justify-content: flex-end;
+    .flexStart {
+        justify-content: flex-start;
     }
 
     img {
@@ -30,7 +32,7 @@
 
 <br />
 
-<h3 style="text-align:center">@EventName</h3>
+<h3 style="text-align:center">@Session.currentEvent.name</h3>
 
 <br />
 
@@ -38,51 +40,32 @@
     <img src=@ImagePath />
     <br />
     <RadzenCard>
-        <div>
-            <div class="flexRow">
-                <div>
-                    <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left">@EventName</RadzenText>
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
-                </div>
-                <div class="rightAlign">
-                    <div class="flexRow rightAlign flexEnd">
-                        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Date</RadzenText>
-                        <RadzenIcon Icon="schedule" />
-                    </div>
-                    <div class="flexRow rightAlign flexEnd">
-                        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Time</RadzenText>
-                        <RadzenIcon Icon="event" />
-                    </div>
-                </div>
+        <div class="flexColumn">
+            <RadzenText TextStyle="TextStyle.H4" >@Session.currentEvent.name</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" >@cs.museums[Session.currentEvent.museum].name</RadzenText>
+
+            <div class="flexRow  flexStart">
+                <RadzenIcon Icon="schedule" />
+
+                <RadzenText TextStyle="TextStyle.H5">@Session.currentEvent.startTime.ToShortDateString()</RadzenText>
             </div>
+            <div class="flexRow  flexStart">
+                <RadzenIcon Icon="event" />
+
+                <RadzenText TextStyle="TextStyle.H5">@Session.currentEvent.startTime.ToShortTimeString()</RadzenText>
+            </div>
+            <div>@Session.currentEvent.description</div>
+
         </div>
-        <div>@Body</div>
     </RadzenCard>
-    <RadzenButton class="mainColor" Click=@(args => OnClick("Large button")) Style="width: 100%;" Text="Register" />
-    
+    <RadzenButton class="mainColor" Click=@(args => OnClickRegister()) Style="width: 100%;" Text="Register" />
+
 </div>
 
 @code {
-
-    [Parameter]
-    public string EventName { get; set; } = "Dino Event";
-
-    [Parameter]
-    public string MuseumName { get; set; } = "Dino Musuem";
-
-    [Parameter]
-    public string Date { get; set; } = "11/11/11";
-
-    [Parameter]
-    public string Time { get; set; } = "12:30 - 5:30";
-
-    [Parameter]
-    public string Body { get; set; } = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris";
-
-    [Parameter]
     public string ImagePath { get; set; } = "Images/randmuseum.png";
 
-    async void OnClick(string buttonName)
+    async void OnClickRegister()
     {
         await App.Current.MainPage.Navigation.PushAsync(new xTicketDetails());
     }

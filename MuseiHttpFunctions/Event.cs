@@ -1,13 +1,15 @@
 ﻿using System;
+using Newtonsoft.Json;
 
-namespace musei.Data
+namespace MuseiHttpFunctions
 {
-	public class Event
-	{
+    public class Event
+    {
         public string id { get; set; }
 
         public string name { get; set; }
 
+        [JsonProperty(PropertyName = "museum")]
         public string museum { get; set; }
 
         public DateTime startTime { get; set; }

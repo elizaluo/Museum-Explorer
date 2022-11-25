@@ -1,7 +1,5 @@
 ﻿@page "/museumcardclient"
-@inject NavigationManager NavManager
-@inject NavigationManager NavigationManager
-@using musei.Pages
+@using musei.Data
 
 
 @using Radzen
@@ -12,34 +10,26 @@
 <RadzenCard>
     <div class="flexRow">
         <div class="leftAlign">
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@MuseumName">
+            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum())>
                 <img src=@ImagePath />
             </RadzenButton>
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@MuseumName" Size="ButtonSize.Large" />
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMap("Large button")) Text="@Address" Icon="account_balance" />
-            <RadzenButton Variant="Variant.Text" Text="@OpeningHours" Icon="event" />
-            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickFollow("Danger button")) Text=@buttonStatus ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Medium" />
-
+            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum()) Text="@m.name" Size="ButtonSize.Large" />
+            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickAddress()) Text="@m.address" Icon="account_balance" />
+            <RadzenButton Variant="Variant.Text" Text="@m.hours" Icon="event" />
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickFollow()) Text=@buttonStatus ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Medium" />
         </div>
     </div>
 </RadzenCard>
 
 @code {
     [Parameter]
-    public string MuseumName { get; set; }
+    public Museum m { get; set; }
 
-    [Parameter]
-    public string Address { get; set; }
-
-    [Parameter]
-    public string OpeningHours { get; set; }
-
-    [Parameter]
-    public string ImagePath { get; set; }
+    public string ImagePath { get; set; } = "Images/randmuseum.png";
 
     private string buttonStatus = "Follow";
 
-    void OnClickFollow(string buttonName)
+    void OnClickFollow()
     {
         if (buttonStatus == "Follow")
         {
@@ -50,12 +40,14 @@
             buttonStatus = "Follow";
         }
     }
-    void OnClickMap(string buttonName)
+
+    void OnClickAddress()
     {
     }
-    async void OnClickEvent(string buttonName)
+
+    async void OnClickMuseum()
     {
-        //NavigationManager.NavigateTo("//museum");
+        Session.currentMuseum = m;
         await App.Current.MainPage.Navigation.PushAsync(new xMuseumPage());
     }
 }
