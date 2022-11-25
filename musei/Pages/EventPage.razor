@@ -1,7 +1,7 @@
 ﻿@page "/event"
 @using Radzen
 @using musei.Data
-
+@inject CosmosService cs
 
 <style>
     .flexRow {
@@ -42,7 +42,7 @@
     <RadzenCard>
         <div class="flexColumn">
             <RadzenText TextStyle="TextStyle.H4" >@Session.currentEvent.name</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5" >@Session.currentEvent.museum</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" >@cs.museums[Session.currentEvent.museum].name</RadzenText>
 
             <div class="flexRow  flexStart">
                 <RadzenIcon Icon="schedule" />
@@ -58,14 +58,14 @@
 
         </div>
     </RadzenCard>
-    <RadzenButton class="mainColor" Click=@(args => OnClick("Large button")) Style="width: 100%;" Text="Register" />
+    <RadzenButton class="mainColor" Click=@(args => OnClickRegister()) Style="width: 100%;" Text="Register" />
 
 </div>
 
 @code {
     public string ImagePath { get; set; } = "Images/randmuseum.png";
 
-    async void OnClick(string buttonName)
+    async void OnClickRegister()
     {
         await App.Current.MainPage.Navigation.PushAsync(new xTicketDetails());
     }
