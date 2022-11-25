@@ -2,6 +2,8 @@
 
 @using Radzen
 @using Microsoft.Maui.Graphics
+@using musei.Data
+@inject CosmosService cs
 
 
 <style>
@@ -31,53 +33,45 @@
 </style>
 
 <RadzenCard class="flexColumn">
-    <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@EventName">
+    <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent())>
         <img src=@ImagePath />
     </RadzenButton>
     <div class="flexRow">
-   
-        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@EventName" Size="ButtonSize.Large" />
+        <div>count = @cs.museums.Count</div>
+        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent()) Text=@e.name Size="ButtonSize.Large" />
 
         <div class="textIcon">
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Date</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@e.startTime.ToShortTimeString() </RadzenText>
             <RadzenIcon Icon="schedule" />
         </div>
     </div>
     <div class="flexRow">
-        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@MuseumName</RadzenText>
+        @*<RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@museums[e.museum].name</RadzenText>*@
         <div class="textIcon">
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Time</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@e.startTime.ToShortDateString()</RadzenText>
             <RadzenIcon Icon="event" />
         </div>
     </div>
 
-    <div>@Body</div>
-
-
+    <div>@e.description</div>
 </RadzenCard>
 
 @code {
-    [Parameter]
-    public string EventName { get; set; }
+    Dictionary<string, Museum> museums = new Dictionary<string, Museum>();
 
     [Parameter]
-    public string MuseumName { get; set; }
-
-    [Parameter]
-    public string Date { get; set; }
-
-    [Parameter]
-    public string Time { get; set; }
-
-    [Parameter]
-    public string Body { get; set; }
+    public Event e { get; set; }
 
     [Parameter]
     public string ImagePath { get; set; }
 
-    async void OnClickEvent(string buttonName)
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    museums = await cs.GetMuseums();
+    //}
+
+    async void OnClickEvent()
     {
-        //NavigationManager.NavigateTo("//museum");
         await App.Current.MainPage.Navigation.PushAsync(new xEventPage());
     }
 }

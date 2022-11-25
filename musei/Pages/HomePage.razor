@@ -4,7 +4,8 @@
 @using musei.Data
 @using musei.Pages
 @using System.Text.Json
-@using Microsoft.Azure.Cosmos;
+@inject CosmosService cs
+
 
 <style>
     .eventNewsList {
@@ -15,25 +16,24 @@
 </style>
 
 <br />
-<h3>Events and News</h3>
+<h3>Events and News2</h3>
 
 <div class="eventNewsList">
-    @foreach (Event e in @events.Values)
+
+    @if (cs.events.Count > 0)
     {
-        <EventCard EventName=@e.name MuseumName=@museums[e.museum].name Date=@e.startTime.ToShortDateString() Time=@e.startTime.ToShortTimeString() ImagePath="Images/randmuseum.png" Body=@e.description />
+        foreach (Event ev in cs.events.Values)
+        {
+            <EventCard e=ev ImagePath="Images/randmuseum.png" />
+        }
     }
 </div>
 
 @code {
     Dictionary<string, Event> events = new Dictionary<string, Event>();
-    Dictionary<string, Museum> museums = new Dictionary<string, Museum>();
 
     protected override async Task OnInitializedAsync()
     {
-        await DatabaseController.getAllEvents();
-        await DatabaseController.getAllMuseums();
-
-        events = DatabaseController.events;
-        museums = DatabaseController.museums;
+        await cs.GetEvents();
     }
 }

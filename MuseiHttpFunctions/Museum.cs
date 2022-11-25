@@ -1,11 +1,14 @@
 ﻿using System;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
-namespace musei.Data
+namespace MuseiHttpFunctions
 {
-	public class Museum
-	{
+    public class Museum
+    {
         public string id { get; set; }
 
+        [JsonProperty(PropertyName = "name")]
         public string name { get; set; }
 
         public string address { get; set; }
