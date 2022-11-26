@@ -2,53 +2,61 @@
 @using Radzen
 @using Microsoft.Maui.Graphics
 @using Microsoft.Maui.Layouts
-@inject NavigationManager NavigationManager
+@using musei.Data
 
+@if (Session.currentUser == null)
+{
+    <LogIn/>
+}
+else
+{
+    <br />
 
-<br />
+    <h3 style="text-align:center">Your Account</h3>
 
-<h3 style="text-align:center">Your Account</h3>
+    <br />
 
-<br />
-
-<div class="flexRow" style="justify-content:space-evenly">
-    <RadzenText TextAlign="TextAlign.Left">
-        <RadzenButton Variant="Variant.Flat" Click=@(args => OnResetPassword("reset password")) Text="Reset Password"
-                      ButtonStyle="ButtonStyle.Danger" />
-    </RadzenText>
-    <RadzenText TextAlign="TextAlign.Right">
+    <div class="flexRow" style="justify-content:space-evenly">
+        <RadzenText TextAlign="TextAlign.Left">
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnResetPassword("reset password")) Text="Reset Password"
+                          ButtonStyle="ButtonStyle.Danger" />
+        </RadzenText>
+        <RadzenText TextAlign="TextAlign.Right">
             <RadzenButton Variant="Variant.Flat" Click=@(args => OnLogout("logging out")) Text="Log Out"
                           ButtonStyle="ButtonStyle.Danger" />
-    </RadzenText>
-</div>
-
-<br />
-
-<RadzenCard Class="rz-background-color-primary-lighter rz-shadow-0 rz-border-radius-0"
-            style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem;">
-    <div>
-        <RadzenText TextStyle="TextStyle.H6" Class="rz-color-primary-light"><strong>Personal Information</strong></RadzenText>
-        <RadzenText TextStyle="TextStyle.H5">Name: John Doe</RadzenText>
-        <RadzenText TextStyle="TextStyle.H5">Birthday: 11th March, 2000</RadzenText>
-        <RadzenText TextStyle="TextStyle.H5">Email: jdoe@gmail.com</RadzenText>
-    </div>
-</RadzenCard>
-
-<RadzenCard Class="rz-background-color-primary-lighter rz-shadow-0 rz-border-radius-0"
-            style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem;">
-    <div>
-        <RadzenText TextStyle="TextStyle.H6" Class="rz-color-primary-light"><strong>Your Booking(s)</strong></RadzenText>
-        <BookingCard EventName="This event" MuseumName="Museo de Roma" EventDate="10/21/22"
-                     EventTime="12:00-17:30" ImagePath="Images/randmuseum.png"
-                     Body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                     labore et dolore magna aliqua. " />
-        <BookingCard EventName="That event" MuseumName="Musei in Commune" EventDate="12/30/22"
-                     EventTime="12:00-17:30" ImagePath="Images/randmuseum.png"
-                     Body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                     labore et dolore magna aliqua. " />
+        </RadzenText>
     </div>
 
-</RadzenCard>
+    <br />
+
+    <RadzenCard Class="rz-background-color-primary-lighter rz-shadow-0 rz-border-radius-0"
+                style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem;">
+        <div>
+            <RadzenText TextStyle="TextStyle.H6" Class="rz-color-primary-light"><strong>Personal Information</strong></RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">Name: @Session.currentUser.name</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">Birthday: @Session.currentUser.birthDate.ToLongDateString()</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">Email: @Session.currentUser.id</RadzenText>
+        </div>
+    </RadzenCard>
+
+    <RadzenCard Class="rz-background-color-primary-lighter rz-shadow-0 rz-border-radius-0"
+                style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem;">
+        <div>
+            <RadzenText TextStyle="TextStyle.H6" Class="rz-color-primary-light"><strong>Your Booking(s)</strong></RadzenText>
+            <BookingCard EventName="This event" MuseumName="Museo de Roma" EventDate="10/21/22"
+                         EventTime="12:00-17:30" ImagePath="Images/randmuseum.png"
+                         Body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                     labore et dolore magna aliqua. " />
+            <BookingCard EventName="That event" MuseumName="Musei in Commune" EventDate="12/30/22"
+                         EventTime="12:00-17:30" ImagePath="Images/randmuseum.png"
+                         Body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                     labore et dolore magna aliqua. " />
+        </div>
+
+    </RadzenCard>
+}
+
+
 
 @code{
     async void OnResetPassword(string buttonName)

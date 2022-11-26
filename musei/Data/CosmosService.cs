@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net.Http.Json;
 using System.Text.Json;
+using musei.Data;
 
 namespace musei.Data
 {
@@ -56,5 +58,47 @@ namespace musei.Data
 
             return museums;
         }
+
+        public async Task<User> SignupUser(User newUser)
+        {
+
+            string uri = "https://musei-functions.azurewebsites.net/api/Signup?code=IvN6nZ-nSuGtdbre8ElyVGx-oGr_k2VpImM5XUH3NjzdAzFudIYChA==";
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync(uri, newUser);
+                if (response.IsSuccessStatusCode)
+                {
+                    return newUser;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
+        }
+        public async Task<User> LoginUser(string email)
+        {
+            string uri = $"https://musei-functions.azurewebsites.net/api/login/{email}/{email}?code=A0wog4aBVSCpLG4wLQgwfMAmVSvhqzqWztx6_gUCO9nZAzFumUR9OQ==";
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    User user = JsonSerializer.Deserialize<User>(content);
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
+        }
     }
+
+    
 }
