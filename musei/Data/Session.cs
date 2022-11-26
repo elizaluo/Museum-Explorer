@@ -5,6 +5,7 @@ namespace musei.Data
 	{
 		static public Event currentEvent;
 		static public Museum currentMuseum;
+		static public User currentUser;
 
 
 		static Session()

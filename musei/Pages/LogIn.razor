@@ -1,6 +1,7 @@
 ﻿@using Radzen
+@using musei.Data
 @page "/login"
-@inject NavigationManager NavigationManager
+@inject CosmosService cs
 
 
 <br />
@@ -17,7 +18,7 @@
                 </RadzenText>
                 <RadzenTemplateForm Data=@("LoginWithRegisterAndReset")>
 
-                    <RadzenLogin LoginText="Log In" Login=@(args => OnLogin(args, "Login with register and password reset"))
+                    <RadzenLogin LoginText="Log In" Login=@(args => OnLogin(args))
                                  ResetPassword=@(args => OnResetPassword(args, "Login with register and password reset"))
                                  Register=@(args => OnRegister("Login with register and password reset")) />
                 </RadzenTemplateForm>
@@ -27,17 +28,15 @@
     </div>
 </div>
 
-@*<EventConsole @ref=@console Class="mt-4" />*@
 
 @code {
     string userName = "admin";
     string password = "admin";
 
-    //EventConsole console;
-
-    void OnLogin(LoginArgs args, string name)
+    async void OnLogin(LoginArgs args )
     {
-        //console.Log($"{name} -> Username: {args.Username}, password: {args.Password}");
+        Session.currentUser = await cs.LoginUser(args.Username);
+        await App.Current.MainPage.Navigation.PushAsync(new xHomePage());
     }
 
     async void OnRegister(string name)

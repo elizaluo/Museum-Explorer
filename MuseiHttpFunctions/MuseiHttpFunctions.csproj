@@ -19,4 +19,10 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="PersonCard.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Person.cs" />
+  </ItemGroup>
 </Project>

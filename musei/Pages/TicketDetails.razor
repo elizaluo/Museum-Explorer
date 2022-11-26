@@ -1,10 +1,8 @@
 ﻿@page "/ticketdetails"
 @using musei.Data
-
 @using Radzen
 @using Microsoft.Maui.Graphics
 @using System.Text.Json
-@inject NavigationManager NavigationManager
 
 <br />
 
@@ -32,13 +30,13 @@
 
 @code {
     List<Person> _people = new List<Person>()
-    {
+{
         new Person(1){ }
     };
 
     void Add()
     {
-        _people.Add(new Person(_people.Count+1));
+        _people.Add(new Person(_people.Count + 1));
     }
 
     async void OnNext(string buttonName)
