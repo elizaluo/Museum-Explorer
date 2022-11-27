@@ -8,13 +8,7 @@
     .flexRow {
         display: flex;
         flex-direction: row;
-    }
-
-    .flexColumn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+        justify-content: stretch;
     }
 
     .rightAlign {
@@ -22,26 +16,57 @@
         margin-right: 0;
     }
 
-    .flexStart {
+/*    .flexStart {
         justify-content: flex-start;
-    }
+    }*/
 
     img {
         max-width: 100%;
+        margin: auto;
+        display: block;
+        background-size: 90% auto;
+    }
+
+    body {
+        padding: 20px;
     }
 </style>
 
 <br />
-
-<h3 style="text-align:center">@sess.currentEvent.name</h3>
-
-<br />
-
+<body>
 <div class="flexColumn">
     <img src=@ImagePath />
+
     <br />
-    <RadzenCard>
-        <div class="flexColumn">
+
+    <RadzenCard Class="rz-background-color-primary-lighter rz-shadow-0"
+                style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem; border-radius: 20px">
+        <div>
+            <div class="flexRow">
+                <RadzenText TextStyle="TextStyle.H4" TextAlign="TextAlign.Left">@sess.currentEvent.name</RadzenText>
+                <div class="flexRow rightAlign">
+                    <RadzenIcon Icon="schedule"/>
+                    <RadzenText TextStyle="TextStyle.H5"
+                                TextAlign="TextAlign.Right">@sess.currentEvent.startTime.ToShortDateString()</RadzenText>
+                </div>
+            </div>
+            <div class="flexRow">
+                <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@cs.museums[sess.currentEvent.museum].name</RadzenText>
+                <div class="flexRow rightAlign">
+                    <RadzenIcon Icon="event"/>
+                    <RadzenText TextStyle="TextStyle.H5"
+                                TextAlign="TextAlign.Right">@sess.currentEvent.startTime.ToShortTimeString()</RadzenText>
+                </div>
+            </div>
+        </div>
+        <div>
+            <RadzenText TextStyle="TextStyle.H6" TextAlign="TextAlign.Left">Price: €@sess.currentEvent.price</RadzenText>
+        </div>
+        <div>
+            <RadzenText TextStyle="TextStyle.H6" TextAlign="TextAlign.Left">@sess.currentEvent.description</RadzenText>
+        </div>
+
+        @*<div class="flexRow">
             <RadzenText TextStyle="TextStyle.H4" >@sess.currentEvent.name</RadzenText>
             <RadzenText TextStyle="TextStyle.H5" >@cs.museums[sess.currentEvent.museum].name</RadzenText>
 
@@ -57,11 +82,13 @@
             </div>
             <div>@sess.currentEvent.description</div>
 
-        </div>
+        </div>*@
     </RadzenCard>
-    <RadzenButton class="mainColor" Click=@(args => OnClickRegister()) Style="width: 100%;" Text="Register" />
+
+    <RadzenButton class="mainColor" Click=@(args => OnClickRegister()) Style="width: 100%; margin-top: 20px" Text="Register" />
 
 </div>
+</body>
 
 @code {
     public string ImagePath { get; set; } = "Images/randmuseum.png";
