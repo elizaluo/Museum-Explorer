@@ -1,5 +1,8 @@
 ﻿@page "/payment"
+@using musei.Data
 @using Radzen
+@inject CosmosService cs
+@inject Session sess
 
 <style>
     .flexRow {
@@ -67,9 +70,10 @@
         <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Security code" />
         <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Zip code" />
     </div>
-    <RadzenButton Click=@(args => OnPayNow("pay now")) class="mainColor" Style="width: 100%;"
+    <RadzenButton Click=@(args => OnPayNow()) class="mainColor" Style="width: 100%;"
                   ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Text="Pay now" />
 </body>
+
 
 
 @code {
@@ -85,8 +89,14 @@
     [Parameter]
     public int Total { get; set; }
 
-    async void OnPayNow(string buttonName)
+    async void OnPayNow()
     {
+        sess.currentUser.eventBookings.Add(sess.currentBooking);
+        Console.WriteLine(sess.currentUser.eventBookings[0]);
+        Console.WriteLine(sess.currentUser.eventBookings[0].people[0]);
+
+        await cs.UpsertUser(sess.currentUser);
+        //sess.currentBooking = null;
         await App.Current.MainPage.Navigation.PushAsync(new xBookingConfirmation());
     }
 }

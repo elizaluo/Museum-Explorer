@@ -69,14 +69,11 @@ else
                 style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem;">
         <div>
             <RadzenText TextStyle="TextStyle.H6" Class="rz-color-primary-light"><strong>Your Booking(s)</strong></RadzenText>
-            <BookingCard EventName="This event" MuseumName="Museo de Roma" EventDate="10/21/22"
-                         EventTime="12:00-17:30" ImagePath="Images/randmuseum.png"
-                         Body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                     labore et dolore magna aliqua. " />
-            <BookingCard EventName="That event" MuseumName="Musei in Commune" EventDate="12/30/22"
-                         EventTime="12:00-17:30" ImagePath="Images/randmuseum.png"
-                         Body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                     labore et dolore magna aliqua. " />
+            @for (int i = 0; i < sess.currentUser.eventBookings.Count; i++)
+            {
+                <BookingCard b=@sess.currentUser.eventBookings[i]/>
+
+            }
         </div>
 
     </RadzenCard>

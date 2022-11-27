@@ -5,10 +5,9 @@ namespace MuseiHttpFunctions
 {
 	public class Booking
 	{
-		public int bookedEvent { get; set; }
+		public string bookedEvent { get; set; }
 
 		public List<Person> people { get; set; }
-
 	}
 }
 
