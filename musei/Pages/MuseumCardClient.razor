@@ -31,15 +31,19 @@
 
     async void OnClickFollow()
     {
+        Console.WriteLine("\n\nON CLICK FOLLOW\n\n");
         if (followStatus == "Follow")
         {
             if (sess.currentUser == null)
             {
-                await App.Current.MainPage.Navigation.PushAsync(new xLogIn());
+                await App.Current.MainPage.Navigation.PushAsync(new xAccount());
 
             }
-            followStatus = "Unfollow";
-            sess.currentUser.followedMuseums.Remove(m.id);
+            else
+            {
+                followStatus = "Unfollow";
+                sess.currentUser.followedMuseums.Remove(m.id);
+            }
         }
         else
         {
@@ -56,7 +60,6 @@
             followStatus = "Unfollow";
         }
     }
-
 
     void OnClickAddress()
     {
