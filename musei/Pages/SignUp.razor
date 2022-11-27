@@ -1,6 +1,7 @@
 ﻿@using Radzen
 @using musei.Data
 @inject CosmosService cs
+@inject Session sess
 @page "/signup"
 
 
@@ -39,8 +40,8 @@
     async void OnClickSignup()
     {
         newUser.birthDate = (DateTime)value;
-        await cs.SignupUser(newUser);
-        Session.currentUser = newUser;
+        await cs.UpsertUser(newUser);
+        sess.currentUser = newUser;
         await App.Current.MainPage.Navigation.PushAsync(new xHomePage());
     }
 }

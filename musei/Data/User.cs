@@ -11,13 +11,10 @@ namespace musei.Data
 
         public string password { get; set; }
 
-        public List<int> followedMuseums { get; set; }
+        public List<string> followedMuseums { get; set; } = new List<string>();
 
         public Boolean isAdmin { get; set; } = false;
 
-        public List<Booking> eventBookings { get; set; }
-
+        public List<Booking> eventBookings { get; set; } = new List<Booking>();
     }
 }
-
-

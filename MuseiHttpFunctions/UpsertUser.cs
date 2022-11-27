@@ -11,9 +11,9 @@ using System.Collections.Generic;
 
 namespace MuseiHttpFunctions
 {
-    public static class Signup
+    public static class UpsertUser
     {
-        [FunctionName("Signup")]
+        [FunctionName("UpsertUser")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             [CosmosDB(
@@ -28,8 +28,5 @@ namespace MuseiHttpFunctions
             await users.AddAsync(newUser);
             return new OkObjectResult(newUser);
         }
-    }
-
-    
+    }    
 }
-

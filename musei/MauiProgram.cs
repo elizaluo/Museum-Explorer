@@ -21,6 +21,7 @@ public static class MauiProgram
 #endif
 		
         builder.Services.AddSingleton<CosmosService>();
+        builder.Services.AddSingleton<Session>();
 
         return builder.Build();
 	}

@@ -2,6 +2,7 @@
 @using Radzen
 @using musei.Data
 @inject CosmosService cs
+@inject Session sess 
 
 <style>
     .flexRow {
@@ -32,7 +33,7 @@
 
 <br />
 
-<h3 style="text-align:center">@Session.currentEvent.name</h3>
+<h3 style="text-align:center">@sess.currentEvent.name</h3>
 
 <br />
 
@@ -41,20 +42,20 @@
     <br />
     <RadzenCard>
         <div class="flexColumn">
-            <RadzenText TextStyle="TextStyle.H4" >@Session.currentEvent.name</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5" >@cs.museums[Session.currentEvent.museum].name</RadzenText>
+            <RadzenText TextStyle="TextStyle.H4" >@sess.currentEvent.name</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" >@cs.museums[sess.currentEvent.museum].name</RadzenText>
 
             <div class="flexRow  flexStart">
                 <RadzenIcon Icon="schedule" />
 
-                <RadzenText TextStyle="TextStyle.H5">@Session.currentEvent.startTime.ToShortDateString()</RadzenText>
+                <RadzenText TextStyle="TextStyle.H5">@sess.currentEvent.startTime.ToShortDateString()</RadzenText>
             </div>
             <div class="flexRow  flexStart">
                 <RadzenIcon Icon="event" />
 
-                <RadzenText TextStyle="TextStyle.H5">@Session.currentEvent.startTime.ToShortTimeString()</RadzenText>
+                <RadzenText TextStyle="TextStyle.H5">@sess.currentEvent.startTime.ToShortTimeString()</RadzenText>
             </div>
-            <div>@Session.currentEvent.description</div>
+            <div>@sess.currentEvent.description</div>
 
         </div>
     </RadzenCard>

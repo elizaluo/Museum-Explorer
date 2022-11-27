@@ -1,18 +1,11 @@
 ﻿using System;
 namespace musei.Data
 {
-	public static class Session
+	public class Session
 	{
-		static public Event currentEvent;
-		static public Museum currentMuseum;
-		static public User currentUser;
-
-
-		static Session()
-		{
-		}
-
-
+		public Event currentEvent;
+		public Museum currentMuseum;
+		public User currentUser;
 	}
 }
 

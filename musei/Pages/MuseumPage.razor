@@ -2,6 +2,7 @@
 @using Radzen
 @using musei.Data
 @inject CosmosService cs
+@inject Session sess
 
 <style>
     .flexColumn {
@@ -26,7 +27,7 @@
 <br />
 <img src=@ImagePath />
 <br />
-<h3 style="text-align:center">@Session.currentMuseum.name</h3>
+<h3 style="text-align:center">@sess.currentMuseum.name</h3>
 
 <br />
 
@@ -34,21 +35,21 @@
     <div class="flexRow">
         <div class="flexRow">
             <RadzenIcon Icon="place" />
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Session.currentMuseum.address</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@sess.currentMuseum.address</RadzenText>
         </div>
         <div class="flexRow">
             <RadzenIcon Icon="schedule" />
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@Session.currentMuseum.hours</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@sess.currentMuseum.hours</RadzenText>
         </div>
     </div>
     <br />
     <br />
     <h4>Museum Events</h4>
     <div class="eventNewsList">
-        @for (int i = 0; i < Session.currentMuseum.events.Count; i++)
+        @for (int i = 0; i < sess.currentMuseum.events.Count; i++)
         {
 
-            <EventCard e=cs.events[Session.currentMuseum.events[i]] />
+            <EventCard e=cs.events[sess.currentMuseum.events[i]] />
         }
     </div>
 </div>

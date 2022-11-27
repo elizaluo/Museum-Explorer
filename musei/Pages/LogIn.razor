@@ -2,10 +2,11 @@
 @using musei.Data
 @page "/login"
 @inject CosmosService cs
+@inject Session sess
 
 
 <br />
-
+<div>cur user = @sess.currentUser</div>
 <RadzenText TextStyle="TextStyle.H3" TextAlign="TextAlign.Center">Musei Fantastici</RadzenText>
 <RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center"><br />Log in with your account and catch up on events personalized to you!</RadzenText>
 
@@ -29,14 +30,17 @@
 </div>
 
 
+
 @code {
     string userName = "admin";
     string password = "admin";
 
-    async void OnLogin(LoginArgs args )
+    async void OnLogin(LoginArgs args)
     {
-        Session.currentUser = await cs.LoginUser(args.Username);
-        await App.Current.MainPage.Navigation.PushAsync(new xHomePage());
+        sess.currentUser = await cs.LoginUser(args.Username);
+        await App.Current.MainPage.Navigation.PopToRootAsync();
+
+        //await App.Current.MainPage.Navigation.PushAsync(new xHomePage());
     }
 
     async void OnRegister(string name)

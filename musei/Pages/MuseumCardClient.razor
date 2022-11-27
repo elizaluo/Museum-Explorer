@@ -1,9 +1,9 @@
 ﻿@page "/museumcardclient"
 @using musei.Data
-
-
 @using Radzen
 @using Microsoft.Maui.Graphics
+@inject Session sess
+@inject CosmosService cs
 
 <link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
 
@@ -16,30 +16,47 @@
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum()) Text="@m.name" Size="ButtonSize.Large" />
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickAddress()) Text="@m.address" Icon="account_balance" />
             <RadzenButton Variant="Variant.Text" Text="@m.hours" Icon="event" />
-            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickFollow()) Text=@buttonStatus ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Medium" />
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickFollow()) Text=@followStatus ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Medium" />
         </div>
     </div>
 </RadzenCard>
 
 @code {
     [Parameter]
-    public Museum m { get; set; }
+    public Museum m { get; set; } = null;
 
     public string ImagePath { get; set; } = "Images/randmuseum.png";
 
-    private string buttonStatus = "Follow";
+    private string followStatus = "Follow";
 
-    void OnClickFollow()
+    async void OnClickFollow()
     {
-        if (buttonStatus == "Follow")
+        if (followStatus == "Follow")
         {
-            buttonStatus = "Unfollow";
+            if (sess.currentUser == null)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new xLogIn());
+
+            }
+            followStatus = "Unfollow";
+            sess.currentUser.followedMuseums.Remove(m.id);
         }
         else
         {
-            buttonStatus = "Follow";
+            followStatus = "Follow";
+            sess.currentUser.followedMuseums.Add(m.id);
+        }
+        await cs.UpsertUser(sess.currentUser);
+    }
+
+    protected override void OnInitialized()
+    {
+        if (sess.currentUser != null && m != null && sess.currentUser.followedMuseums.Contains(m.id))
+        {
+            followStatus = "Unfollow";
         }
     }
+
 
     void OnClickAddress()
     {
@@ -47,7 +64,7 @@
 
     async void OnClickMuseum()
     {
-        Session.currentMuseum = m;
+        sess.currentMuseum = m;
         await App.Current.MainPage.Navigation.PushAsync(new xMuseumPage());
     }
 }

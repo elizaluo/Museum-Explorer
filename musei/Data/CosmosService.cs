@@ -59,16 +59,15 @@ namespace musei.Data
             return museums;
         }
 
-        public async Task<User> SignupUser(User newUser)
+        public async Task<User> UpsertUser(User upsertedUser)
         {
-
-            string uri = "https://musei-functions.azurewebsites.net/api/Signup?code=IvN6nZ-nSuGtdbre8ElyVGx-oGr_k2VpImM5XUH3NjzdAzFudIYChA==";
+            string uri = "https://musei-functions.azurewebsites.net/api/UpsertUser?code=QEF_lod90xw1LLfoPXXAIO7Rhx_DbP_fyXEnlB5L6crtAzFue08TdQ==";
             try
             {
-                HttpResponseMessage response = await client.PostAsJsonAsync(uri, newUser);
+                HttpResponseMessage response = await client.PostAsJsonAsync(uri, upsertedUser);
                 if (response.IsSuccessStatusCode)
                 {
-                    return newUser;
+                    return upsertedUser;
                 }
             }
             catch (Exception ex)

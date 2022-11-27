@@ -1,12 +1,34 @@
 ﻿@page "/account"
 @using Radzen
+@using musei.Data
 @using Microsoft.Maui.Graphics
 @using Microsoft.Maui.Layouts
-@using musei.Data
+@inject CosmosService cs
+@inject Session sess
 
-@if (Session.currentUser == null)
+@if (sess.currentUser == null)
 {
-    <LogIn/>
+    <div>
+        <RadzenText TextStyle="TextStyle.H3" TextAlign="TextAlign.Center">Musei Fantastici</RadzenText>
+        <RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center"><br />Log in with your account and catch up on events personalized to you!</RadzenText>
+        <div class="container-fluid">
+            <div class="row d-flex px-3">
+                <div class="col-xl-6 p-3">
+                    <RadzenCard class="p-5">
+                        <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H2" Class="mb-4">
+                        </RadzenText>
+                        <RadzenTemplateForm Data=@("LoginWithRegisterAndReset")>
+
+                            <RadzenLogin LoginText="Log In" Login=@(args => OnLogin(args))
+                                         ResetPassword=@(args => OnResetPassword(args, "Login with register and password reset"))
+                                         Register=@(args => OnRegister("Login with register and password reset")) />
+                        </RadzenTemplateForm>
+                    </RadzenCard>
+                </div>
+
+            </div>
+        </div>
+    </div>
 }
 else
 {
@@ -33,9 +55,9 @@ else
                 style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem;">
         <div>
             <RadzenText TextStyle="TextStyle.H6" Class="rz-color-primary-light"><strong>Personal Information</strong></RadzenText>
-            <RadzenText TextStyle="TextStyle.H5">Name: @Session.currentUser.name</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5">Birthday: @Session.currentUser.birthDate.ToLongDateString()</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5">Email: @Session.currentUser.id</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">Name: @sess.currentUser.name</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">Birthday: @sess.currentUser.birthDate.ToLongDateString()</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">Email: @sess.currentUser.id</RadzenText>
         </div>
     </RadzenCard>
 
@@ -59,6 +81,7 @@ else
 
 
 @code{
+
     async void OnResetPassword(string buttonName)
     {
         await App.Current.MainPage.Navigation.PushAsync(new xChangePassword());
@@ -66,6 +89,24 @@ else
 
     async void OnLogout(string buttonName)
     {
-        await App.Current.MainPage.Navigation.PushAsync(new xLogIn());
+        sess.currentUser = null;
+    }
+
+    async void OnLogin(LoginArgs args)
+    {
+        sess.currentUser = await cs.LoginUser(args.Username);
+        await App.Current.MainPage.Navigation.PopToRootAsync();
+
+        //await App.Current.MainPage.Navigation.PushAsync(new xHomePage());
+    }
+
+    async void OnRegister(string name)
+    {
+        await App.Current.MainPage.Navigation.PushAsync(new xSignUp());
+    }
+
+    async void OnResetPassword(string value, string name)
+    {
+        await App.Current.MainPage.Navigation.PushAsync(new xForgotPassword());
     }
 }
