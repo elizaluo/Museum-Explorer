@@ -33,37 +33,43 @@
         color: #F52D11;
         background-color: #F52D11;
     }
+
+    body {
+        padding: 20px;
+    }
 </style>
 
-<br />
+<body>
+    <RadzenCard Class="rz-border-base-500 rz-shadow-0" Style="margin-bottom: 20px; background-color: #F5F5F5; border-radius: 20px;" >
+        <div class="flexColumn">
+            <div>
+                <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11;"><strong>Price details</strong></RadzenText>
+            </div>
+            <div class="flexRow">
+                <div class="flexStart">
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11;">@NumberOfTickets Ticket(s)</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11;">Taxes and fees</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11;">Total</RadzenText>
 
-<h3>Payment</h3>
-
-<br />
-
-<RadzenCard>
-    <div class="flexRow">
-        <div class="flexStart">
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@NumberOfTickets Ticket(s)</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">Taxes and fees</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">Total</RadzenText>
-
+                </div>
+                <div class="flexEnd">
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11;">€@TicketPrice</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11;">€@TaxesFees</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11;">€@Total</RadzenText>
+                </div>
+            </div>
         </div>
-        <div class="flexEnd">
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@TicketPrice</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@TaxesFees</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@Total</RadzenText>
-        </div>
+    </RadzenCard>
+    <div>
+        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Name on card" />
+        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Debit/Credit card number" />
+        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%; " Placeholder="Expiration date MM/YY" />
+        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Security code" />
+        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Zip code" />
     </div>
-</RadzenCard>
-<RadzenCard>
-    <RadzenAutoComplete Placeholder="Name on card" Style="width: 100%;" />
-    <RadzenAutoComplete Placeholder="Debit/Credit card number" Style="width: 100%;" />
-    <RadzenAutoComplete Placeholder="Expiration date MM/YY" Style="width: 100%;" />
-    <RadzenAutoComplete Placeholder="Security code" Style="width: 100%;" />
-    <RadzenAutoComplete Placeholder="Zip code" Style="width: 100%;" />
-</RadzenCard>
-<RadzenButton Click=@(args => OnPayNow("pay now")) class="mainColor" Style="width: 100%;" Text="Pay now" />
+    <RadzenButton Click=@(args => OnPayNow("pay now")) class="mainColor" Style="width: 100%;"
+                  ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Text="Pay now" />
+</body>
 
 
 @code {
