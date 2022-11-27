@@ -31,32 +31,33 @@
 
     async void OnClickFollow()
     {
-        Console.WriteLine("\n\nON CLICK FOLLOW\n\n");
         if (followStatus == "Follow")
         {
             if (sess.currentUser == null)
             {
                 await App.Current.MainPage.Navigation.PushAsync(new xAccount());
-
             }
             else
             {
                 followStatus = "Unfollow";
-                sess.currentUser.followedMuseums.Remove(m.id);
+                sess.currentUser.followedMuseums.Add(m.id);
             }
         }
         else
         {
             followStatus = "Follow";
-            sess.currentUser.followedMuseums.Add(m.id);
+            sess.currentUser.followedMuseums.Remove(m.id);
         }
         await cs.UpsertUser(sess.currentUser);
     }
 
     protected override void OnInitialized()
-    {
+{
+        Console.WriteLine($"\n\nON INIT\ncurrent user = {sess.currentUser}\n{m}\n");
         if (sess.currentUser != null && m != null && sess.currentUser.followedMuseums.Contains(m.id))
         {
+            Console.WriteLine("\n\nSETTING STATUS\n\n");
+
             followStatus = "Unfollow";
         }
     }

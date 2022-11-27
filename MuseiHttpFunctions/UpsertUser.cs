@@ -25,7 +25,6 @@ namespace MuseiHttpFunctions
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             User newUser = JsonConvert.DeserializeObject<User>(requestBody);
-            log.LogDebug(requestBody);
             await users.AddAsync(newUser);
             return new OkObjectResult(newUser);
         }
