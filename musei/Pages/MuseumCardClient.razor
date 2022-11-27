@@ -11,7 +11,7 @@
     <div class="flexRow">
         <div class="leftAlign">
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum())>
-                <img src=@ImagePath />
+                <img src=@m.imageURL />
             </RadzenButton>
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum()) Text="@m.name" Size="ButtonSize.Large" />
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickAddress()) Text="@m.address" Icon="account_balance" />
@@ -24,8 +24,6 @@
 @code {
     [Parameter]
     public Museum m { get; set; } = null;
-
-    public string ImagePath { get; set; } = "Images/randmuseum.png";
 
     private string followStatus = "Follow";
 

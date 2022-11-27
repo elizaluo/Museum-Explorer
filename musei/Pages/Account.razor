@@ -72,14 +72,11 @@ else
             @for (int i = 0; i < sess.currentUser.eventBookings.Count; i++)
             {
                 <BookingCard b=@sess.currentUser.eventBookings[i]/>
-
             }
         </div>
 
     </RadzenCard>
 }
-
-
 
 @code{
     public bool loggingIn = false;
