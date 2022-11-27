@@ -1,8 +1,12 @@
 ﻿@using Radzen
 @page "/bookconfirm"
-
+@using musei.Data
+@inject CosmosService cs
+@inject Session sess
 
 <br />
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <style>
     .flexColumn {
@@ -11,20 +15,25 @@
         justify-content: center;
         align-items: center;
     }
+
+    .material-icons {
+        font-size: 250px;
+        color: #F52D11;
+    }
 </style>
 
-<h3 style="text-align:center">Booking Confirmed!</h3>
+<h3 style="text-align: center; color: #F52D11">Booking Confirmed!</h3>
 
 
 <div class="container-fluid">
     <div class="row d-flex px-3">
         <div class="col-xl-6 flexColumn">
-            <RadzenImage Path="images/check.png" Style="width: 30%; margin: 2rem" />
+            <i class="material-icons">check_circle</i>
             <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Center">
-                Visit to {Title} on {Date} at {Time} at {Location}.
+                Visit to @sess.currentEvent.name on @sess.currentEvent.startTime.ToShortDateString() at @sess.currentEvent.startTime.ToShortTimeString() at @cs.museums[sess.currentEvent.museum].name.
             </RadzenText>
             <RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center">
-                Confirmation and booking information has been sent to your email.
+                Confirmation and booking information has been sent to your email(s).
             </RadzenText>
             <RadzenImage Path="images/randmuseum.png" Style="width: 90%; margin: 1rem; align-self: center" />
         </div>
