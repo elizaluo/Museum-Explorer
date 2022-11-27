@@ -3,30 +3,63 @@
 @using Radzen
 @using Microsoft.Maui.Graphics
 @using System.Text.Json
+@inject CosmosService cs
+@inject Session sess
 
-<br />
+<style>
+    body {
+        padding: 20px;
+    }
+
+    .title {
+        text-align: center;
+        color: #F52D11;
+    }
+
+    .flexRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: stretch;
+    }
+
+    .person {
+        margin-bottom: 20px;
+    }
+</style>
 
 <link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
 
-<h3>{Event Name} on {Date}</h3>
-<h6>at {Time}</h6>
-<br />
+<body>
+    <div class="title">
+        <RadzenText TextStyle="TextStyle.H3" Style="color: #F52D11;"><strong>@sess.currentEvent.name on @sess.currentEvent.startTime.ToShortDateString()</strong>
+        </RadzenText>
+        <RadzenText TextStyle="TextStyle.H6" Style="color: #F52D11;">at @sess.currentEvent.startTime.ToShortTimeString()</RadzenText>
+    </div>
 
-@foreach (var person in _people)
-{
-    <h5>Person @person.count</h5>
-    <RadzenTextBox Placeholder="Name" Class="w-100" @bind-Value=@person.name />
-    <RadzenTextBox Placeholder="Email" Class="w-100" @bind-Value=person.emailAddress />
-    <RadzenTextArea Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" @bind-Value=@person.optionalSpecialAccomodations />
-    System.Diagnostics.Debug.WriteLine(person);
-}
+    <br />
 
-<RadzenCard class="row align-items-center">
-    <RadzenButton Text="+Add Person" class="align-items-center" Click=@Add />
-</RadzenCard>
-<RadzenCard class="row align-items-center">
-    <RadzenButton Click=@(args => OnNext("next -> payment")) Text="Next" class="align-items-center" />
-</RadzenCard>
+    @foreach (var person in _people)
+    {
+            <div class="person">
+                <h5 style="color: #F52D11">Person @person.count</h5>
+                <RadzenTextBox Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Name" Class="w-100" @bind-Value=@person.name />
+                <RadzenTextBox Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Email" Class="w-100" @bind-Value=person.emailAddress />
+                <RadzenTextArea Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" @bind-Value=@person.optionalSpecialAccomodations />
+            </div>
+        System.Diagnostics.Debug.WriteLine(person);
+    }
+
+    <div class="flexRow" style="justify-content:space-evenly">
+        <RadzenText TextAlign="TextAlign.Left">
+            <RadzenButton Variant="Variant.Flat" Click=@Add Text="+Add Person"
+                          ButtonStyle="ButtonStyle.Danger" />
+        </RadzenText>
+        <RadzenText TextAlign="TextAlign.Right">
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnNext("next -> payment")) Text="Next"
+                          ButtonStyle="ButtonStyle.Danger" />
+        </RadzenText>
+    </div>
+</body>
 
 @code {
     List<Person> _people = new List<Person>()

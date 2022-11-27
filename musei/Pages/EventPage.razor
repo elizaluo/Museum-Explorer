@@ -16,15 +16,12 @@
         margin-right: 0;
     }
 
-/*    .flexStart {
-        justify-content: flex-start;
-    }*/
-
     img {
         max-width: 100%;
         margin: auto;
         display: block;
         background-size: 90% auto;
+        justify-content: center;
     }
 
     body {
@@ -65,24 +62,6 @@
         <div>
             <RadzenText TextStyle="TextStyle.H6" TextAlign="TextAlign.Left">@sess.currentEvent.description</RadzenText>
         </div>
-
-        @*<div class="flexRow">
-            <RadzenText TextStyle="TextStyle.H4" >@sess.currentEvent.name</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5" >@cs.museums[sess.currentEvent.museum].name</RadzenText>
-
-            <div class="flexRow  flexStart">
-                <RadzenIcon Icon="schedule" />
-
-                <RadzenText TextStyle="TextStyle.H5">@sess.currentEvent.startTime.ToShortDateString()</RadzenText>
-            </div>
-            <div class="flexRow  flexStart">
-                <RadzenIcon Icon="event" />
-
-                <RadzenText TextStyle="TextStyle.H5">@sess.currentEvent.startTime.ToShortTimeString()</RadzenText>
-            </div>
-            <div>@sess.currentEvent.description</div>
-
-        </div>*@
     </RadzenCard>
 
     <RadzenButton class="mainColor" Click=@(args => OnClickRegister()) Style="width: 100%; margin-top: 20px" Text="Register" />
