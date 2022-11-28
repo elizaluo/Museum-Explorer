@@ -9,12 +9,13 @@
 
 <RadzenCard>
     <div class="flexRow">
-        <div class="leftAlign">
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum())>
-                <img src=@ImagePath />
-            </RadzenButton>
+        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum())>
+            <img src=@m.imageURL />
+        </RadzenButton>
+        <div class="flexColumn">
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum()) Text="@m.name" Size="ButtonSize.Large" />
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickAddress()) Text="@m.address" Icon="account_balance" />
+            <RadzenText></RadzenText>
+            <RadzenButton class="noHover" Variant="Variant.Text" Click=@(args => OnClickAddress()) Text="@m.address" Icon="account_balance" />
             <RadzenButton Variant="Variant.Text" Text="@m.hours" Icon="event" />
             <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickFollow()) Text=@followStatus ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Medium" />
         </div>
@@ -24,8 +25,6 @@
 @code {
     [Parameter]
     public Museum m { get; set; } = null;
-
-    public string ImagePath { get; set; } = "Images/randmuseum.png";
 
     private string followStatus = "Follow";
 

@@ -35,7 +35,7 @@
 
 <RadzenCard class="flexColumn">
     <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent())>
-        <img src=@ImagePath />
+        <img src=@e.imageURL />
     </RadzenButton>
     <div class="flexRow">
         <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent()) Text=@e.name Size="ButtonSize.Large" />
@@ -59,9 +59,6 @@
 @code {
     [Parameter]
     public Event e { get; set; }
-
-    [Parameter]
-    public string ImagePath { get; set; } = "Images/randmuseum.png";
 
     async void OnClickEvent()
     {

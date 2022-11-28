@@ -16,6 +16,8 @@ namespace musei.Data
 
         public int price { get; set; }
 
+        public string imageURL { get; set; }
+
         public Event()
         {
             this.id = null;
@@ -24,6 +26,7 @@ namespace musei.Data
             this.startTime = default(DateTime);
             this.description = null;
             this.price = 0;
+            this.imageURL = null;
         }
     }
 }

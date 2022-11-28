@@ -3,10 +3,17 @@ namespace musei.Data
 {
 	public class Booking
 	{
-		public int bookedEvent { get; set; }
+		public string bookedEvent { get; set; }
 
 		public List<Person> people { get; set; }
 
-	}
+        public override string ToString()
+		{
+			return $"bookedEvent: {bookedEvent}\nattending people: {people}";
+		}
+
+
+
+    }
 }
 

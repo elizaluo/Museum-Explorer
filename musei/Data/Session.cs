@@ -6,6 +6,7 @@ namespace musei.Data
 		public Event currentEvent;
 		public Museum currentMuseum;
 		public User currentUser;
-	}
+        public Booking currentBooking;
+    }
 }
 

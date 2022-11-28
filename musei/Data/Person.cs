@@ -1,6 +1,6 @@
 using System;
 
-namespace MuseiHttpFunctions
+namespace musei.Data
 {
     public class Person
     {

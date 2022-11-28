@@ -31,7 +31,8 @@
 
 <body>
     <div class="title">
-        <RadzenText TextStyle="TextStyle.H3" Style="color: #F52D11;"><strong>@sess.currentEvent.name on @sess.currentEvent.startTime.ToShortDateString()</strong>
+        <RadzenText TextStyle="TextStyle.H3" Style="color: #F52D11;">
+            <strong>@sess.currentEvent.name on @sess.currentEvent.startTime.ToShortDateString()</strong>
         </RadzenText>
         <RadzenText TextStyle="TextStyle.H6" Style="color: #F52D11;">at @sess.currentEvent.startTime.ToShortTimeString()</RadzenText>
     </div>
@@ -40,12 +41,12 @@
 
     @foreach (var person in _people)
     {
-            <div class="person">
-                <h5 style="color: #F52D11">Person @person.count</h5>
-                <RadzenTextBox Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Name" Class="w-100" @bind-Value=@person.name />
-                <RadzenTextBox Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Email" Class="w-100" @bind-Value=person.emailAddress />
-                <RadzenTextArea Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" @bind-Value=@person.optionalSpecialAccomodations />
-            </div>
+        <div class="person">
+            <h5 style="color: #F52D11">Person @person.count</h5>
+            <RadzenTextBox Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Name" Class="w-100" @bind-Value=@person.name />
+            <RadzenTextBox Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Email" Class="w-100" @bind-Value=person.emailAddress />
+            <RadzenTextArea Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Special accomodations (optional)" Class="w-100" Rows="2" @bind-Value=@person.optionalSpecialAccomodations />
+        </div>
         System.Diagnostics.Debug.WriteLine(person);
     }
 
@@ -63,18 +64,28 @@
 
 @code {
     List<Person> _people = new List<Person>()
-{
-        new Person(1){ }
+    {
+        new Person()
+        {
+            count = 1
+        }
     };
 
     void Add()
     {
-        _people.Add(new Person(_people.Count + 1));
+        Person newPerson = new Person();
+        newPerson.count = _people.Count + 1;
+
+        _people.Add(newPerson);
     }
 
     async void OnNext(string buttonName)
     {
         Console.WriteLine(_people);
+        Booking booking = new Booking();
+        booking.bookedEvent = sess.currentEvent.id;
+        booking.people = _people;
+        sess.currentBooking = booking;
         await App.Current.MainPage.Navigation.PushAsync(new xPayment());
     }
 }

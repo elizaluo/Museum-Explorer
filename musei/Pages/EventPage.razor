@@ -32,7 +32,7 @@
 <br />
 <body>
 <div class="flexColumn">
-    <img src=@ImagePath />
+    <img src=@sess.currentEvent.imageURL />
 
     <br />
 
@@ -70,11 +70,16 @@
 </body>
 
 @code {
-    public string ImagePath { get; set; } = "Images/randmuseum.png";
-
-    async void OnClickRegister()
-    {
-        await App.Current.MainPage.Navigation.PushAsync(new xTicketDetails());
+        async void OnClickRegister()
+        {
+            if (sess.currentUser == null)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new xAccount());
+            }
+            else
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new xTicketDetails());
+            }
+        }
     }
-}
 

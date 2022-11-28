@@ -13,6 +13,8 @@ namespace musei.Data
         public string hours { get; set; }
 
         public List<string> events { get; set; }
+
+        public string imageURL { get; set; }
     }
 }
 

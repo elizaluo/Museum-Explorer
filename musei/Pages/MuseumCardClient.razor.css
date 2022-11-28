@@ -14,3 +14,12 @@
 img {
     max-width: 100%;
 }
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.noHover {
+    pointer-events: none;
+}
