@@ -7,9 +7,4 @@ public partial class xBookingConfirmation : ContentPage
 		InitializeComponent();
 	}
 
-    async void OnButtonClicked(object sender, EventArgs args)
-    {
-        await App.Current.MainPage.Navigation.PopToRootAsync();
-    }
-
 }
