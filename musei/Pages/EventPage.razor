@@ -70,9 +70,16 @@
 </body>
 
 @code {
-    async void OnClickRegister()
-    {
-        await App.Current.MainPage.Navigation.PushAsync(new xTicketDetails());
+        async void OnClickRegister()
+        {
+            if (sess.currentUser == null)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new xAccount());
+            }
+            else
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new xTicketDetails());
+            }
+        }
     }
-}
 
