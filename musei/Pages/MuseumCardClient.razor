@@ -9,10 +9,10 @@
 
 <RadzenCard>
     <div class="flexRow">
+        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum())>
+            <img src=@m.imageURL />
+        </RadzenButton>
         <div class="leftAlign">
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum())>
-                <img src=@m.imageURL />
-            </RadzenButton>
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum()) Text="@m.name" Size="ButtonSize.Large" />
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickAddress()) Text="@m.address" Icon="account_balance" />
             <RadzenButton Variant="Variant.Text" Text="@m.hours" Icon="event" />
