@@ -12,9 +12,10 @@
         <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum())>
             <img src=@m.imageURL />
         </RadzenButton>
-        <div class="leftAlign">
+        <div class="flexColumn">
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum()) Text="@m.name" Size="ButtonSize.Large" />
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickAddress()) Text="@m.address" Icon="account_balance" />
+            <RadzenText></RadzenText>
+            <RadzenButton class="noHover" Variant="Variant.Text" Click=@(args => OnClickAddress()) Text="@m.address" Icon="account_balance" />
             <RadzenButton Variant="Variant.Text" Text="@m.hours" Icon="event" />
             <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickFollow()) Text=@followStatus ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Medium" />
         </div>
