@@ -7,10 +7,10 @@
 
 <RadzenCard>
     <div class="flexRow">
+        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@MuseumName">
+            <img src=@ImagePath />
+        </RadzenButton>
         <div class="leftAlign">
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@MuseumName">
-                <img src=@ImagePath />
-            </RadzenButton>
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@MuseumName" Size="ButtonSize.Large" />
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMap("Large button")) Text="@Address" Icon="account_balance" />
             <RadzenButton Variant="Variant.Text" Text="@OpeningHours" Icon="event" />
