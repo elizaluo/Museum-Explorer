@@ -3,6 +3,9 @@
 @using Radzen
 @using Microsoft.Maui.Graphics
 @using System.Text.Json
+@using musei.Data
+@inject CosmosService cs
+@inject Session sess
 
 <link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
 <style>
@@ -17,22 +20,37 @@
 <br />
 
 
-<h3>Add Event</h3>
+<h3>Add Event To @sess.currentMuseum.name</h3>
 
 <RadzenCard class="flexColumn">
-    <RadzenTextBox  Placeholder="Title" Class="w-100" />
-    <RadzenTextBox Placeholder="Museum" Class="w-100" />
-    <RadzenDatePicker @bind-Value=@startTime TValue="DateTime?" ShowTime="true" HoursStep="1" MinutesStep="15" DateFormat="MM/dd/yyyy HH:mm" Class="w-100" />
-    <RadzenTextBox Placeholder="Museum" Class="w-100" />
-    <RadzenTextArea Placeholder="Body" Class="w-100" Rows="12" />
+    <RadzenTextBox  Placeholder="Title" Class="w-100" @bind-Value=@newEvent.name/>
+    <RadzenDatePicker TValue="DateTime?" ShowTime="true" HoursStep="1" MinutesStep="15" DateFormat="MM/dd/yyyy HH:mm" Class="w-100" @bind-Value=@startTime Placeholder ="Date"/>
+    <RadzenTextArea Placeholder="Description" Class="w-100" Rows="12" @bind-Value=@newEvent.description />
+    <RadzenNumeric TValue="int?" Placeholder="Price" Class="w-100" @bind-Value=@price/>
     <RadzenUpload Multiple="false" Accept="image/*" Url="upload/single" class="w-100" ChooseText="Select Image" />
 </RadzenCard>
 
 <RadzenCard class="row align-items-center">
-    <RadzenButton Text="Submit" class="align-items-center" />
+    <RadzenButton Text="Submit" class="align-items-center" Click=@(args => OnNext()) />
 </RadzenCard>
 
 @code {
-    
-    DateTime? startTime = DateTime.Today;
+
+    DateTime? startTime;
+    int? price;
+    Event newEvent = new Event();
+
+    async void OnNext()
+    {
+        if (!(startTime != null && price != null))
+        {
+
+        }
+        else
+        {
+            newEvent.startTime = (DateTime)startTime;
+            newEvent.price = (int)price;
+            await App.Current.MainPage.Navigation.PopToRootAsync();
+        }
+    }
 }
