@@ -80,6 +80,8 @@
         await cs.UploadEvent(newEvent);
         await cs.UpdateMuseum(sess.currentMuseum);
         NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Event Creation Successful", Duration = 40000 });
+        await cs.GetMuseums();
+        await cs.GetEvents();
         await Task.Delay(2000);
         await App.Current.MainPage.Navigation.PopToRootAsync();
     }
