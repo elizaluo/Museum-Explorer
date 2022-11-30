@@ -7,4 +7,7 @@ public partial class xBookingConfirmation : ContentPage
 		InitializeComponent();
 	}
 
+    void ContentPage_NavigatedFrom(System.Object sender, Microsoft.Maui.Controls.NavigatedFromEventArgs e)
+    {
+    }
 }

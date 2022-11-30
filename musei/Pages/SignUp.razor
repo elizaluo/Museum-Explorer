@@ -4,33 +4,40 @@
 @inject Session sess
 @page "/signup"
 
+<style>
+    body {
+        padding: 20px;
+    }
 
-<br />
+    .bottom {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        text-align: right;
+    }
+</style>
 
-<RadzenText TextStyle="TextStyle.H3" TextAlign="TextAlign.Center">Musei Fantastici</RadzenText>
-<RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center"><br />Welcome to our community!</RadzenText>
-
-
-<div class="container-fluid">
-    <div class="row d-flex px-3">
-        <div class="col-xl-6 p-3">
-            <RadzenCard>
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Full Name</RadzenText>
-                <RadzenTextBox @bind-Value=@newUser.name Class="w-100" />
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Birthday</RadzenText>
-                <RadzenDatePicker @bind-Value=@value DateFormat="d" Class="w-100" />
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Email</RadzenText>
-                <RadzenTextBox @bind-Value=@newUser.id Class="w-100" />
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Password</RadzenText>
-                <RadzenTextBox @bind-Value=@newUser.password Class="w-100" />
+<body>
+    <div>
+        <RadzenText TextStyle="TextStyle.H3"
+                    TextAlign="TextAlign.Center" Style="color: #F52D11"><strong>Musei Fantastici</strong></RadzenText>
+        <RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center">Welcome to our community!</RadzenText>
+        <div>
+            <RadzenCard Class="rz-border-base-0 rz-shadow-0" Style="margin-top: 20px">
+                <RadzenTextBox Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Full Name" @bind-Value=@newUser.name Class="w-100" />
+                <RadzenDatePicker Class="w-100" Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Birthday" @bind-Value=@value DateFormat="d" />
+                <RadzenTextBox Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Email" @bind-Value=@newUser.id Class="w-100" />
+                <RadzenPassword Style="border-radius: 10px; margin-bottom: 10px" Placeholder="Password" @bind-Value=@newUser.password Class="w-100" />
             </RadzenCard>
-            <RadzenCard>
-                <RadzenButton Click=@(args => OnClickSignup()) Text="Sign Up" ButtonStyle="ButtonStyle.Primary" />
-            </RadzenCard>
+            <RadzenButton Click=@(args => OnClickSignup()) Text="Sign Up" Style="width: 100%;"
+                          ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" />
         </div>
-
+        <div class="bottom">
+            <RadzenText Style="color: #F52D11">Already a Member?</RadzenText>
+            <RadzenButton Variant="Variant.Text" ButtonStyle="ButtonStyle.Danger" Click=@(args => OnClickLogin()) Text="Log In"/>
+        </div>
     </div>
-</div>
+</body>
 
 @code {
     public User newUser = new User();
@@ -43,5 +50,10 @@
         await cs.UpsertUser(newUser);
         sess.currentUser = newUser;
         await App.Current.MainPage.Navigation.PushAsync(new xHomePage());
+    }
+
+    async void OnClickLogin()
+    {
+        await App.Current.MainPage.Navigation.PushAsync(new xAccount());
     }
 }

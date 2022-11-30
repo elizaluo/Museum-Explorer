@@ -6,42 +6,53 @@
 @inject CosmosService cs
 @inject Session sess
 
+<style>
+    body {
+        padding: 20px;
+    }
+
+    .flexRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: stretch;
+    }
+
+    .rightAlign {
+        margin-left: auto;
+        margin-right: 0;
+        align-content: center;
+        justify-content: center;
+    }
+
+    img {
+        max-width: 100%;
+    }
+  
+</style>
+
 @if (sess.currentUser == null)
 {
-    <div>
-        @if (loggingIn)
-        {
-            <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
-        }
-        <RadzenText TextStyle="TextStyle.H3" TextAlign="TextAlign.Center">Musei Fantastici</RadzenText>
-        <RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center"><br />Log in with your account and catch up on events personalized to you!</RadzenText>
-        <div class="container-fluid">
-            <div class="row d-flex px-3">
-                <div class="col-xl-6 p-3">
-                    <RadzenCard class="p-5">
-                        <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H2" Class="mb-4">
-                        </RadzenText>
-                        <RadzenTemplateForm Data=@("LoginWithRegisterAndReset")>
-
-                            <RadzenLogin LoginText="Log In" Login=@(args => OnLogin(args))
-                                         ResetPassword=@(args => OnResetPassword(args, "Login with register and password reset"))
-                                         Register=@(args => OnRegister("Login with register and password reset")) />
-                        </RadzenTemplateForm>
-                    </RadzenCard>
-                </div>
-
-            </div>
+    <body>
+        <div>
+            @if (loggingIn)
+            {
+                <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+            }
+            <RadzenText TextStyle="TextStyle.H3"
+                        TextAlign="TextAlign.Center" Style="color: #F52D11"><strong>Musei Fantastici</strong></RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" Style="margin-bottom: 20px"
+                        TextAlign="TextAlign.Center">Log in with your account and catch up on events personalized to you!</RadzenText>
+            <RadzenTemplateForm Data=@("LoginWithRegisterAndReset")>
+                <RadzenLogin UserText="Email" LoginText="Log In" Login=@(args => OnLogin(args))
+                                ResetPassword=@(args => OnResetPassword(args, "Login with register and password reset"))
+                                Register=@(args => OnRegister("Login with register and password reset")) />
+            </RadzenTemplateForm>  
         </div>
-    </div>
+    </body>
 }
 else
 {
-    <br />
-
-    <h3 style="text-align:center">Your Account</h3>
-
-    <br />
-
+<body>
     <div class="flexRow" style="justify-content:space-evenly">
         <RadzenText TextAlign="TextAlign.Left">
             <RadzenButton Variant="Variant.Flat" Click=@(args => OnResetPassword("reset password")) Text="Reset Password"
@@ -53,29 +64,26 @@ else
         </RadzenText>
     </div>
 
-    <br />
-
-    <RadzenCard Class="rz-background-color-primary-lighter rz-shadow-0 rz-border-radius-0"
-                style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem;">
+    <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
         <div>
-            <RadzenText TextStyle="TextStyle.H6" Class="rz-color-primary-light"><strong>Personal Information</strong></RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Personal Information</strong></RadzenText>
             <RadzenText TextStyle="TextStyle.H5">Name: @sess.currentUser.name</RadzenText>
             <RadzenText TextStyle="TextStyle.H5">Birthday: @sess.currentUser.birthDate.ToLongDateString()</RadzenText>
             <RadzenText TextStyle="TextStyle.H5">Email: @sess.currentUser.id</RadzenText>
         </div>
     </RadzenCard>
 
-    <RadzenCard Class="rz-background-color-primary-lighter rz-shadow-0 rz-border-radius-0"
-                style="margin: 0 calc(-1 * var(--rz-card-padding)); padding: 2rem;">
+    <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
         <div>
-            <RadzenText TextStyle="TextStyle.H6" Class="rz-color-primary-light"><strong>Your Booking(s)</strong></RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Your Booking(s)</strong></RadzenText>
             @for (int i = 0; i < sess.currentUser.eventBookings.Count; i++)
             {
-                <BookingCard b=@sess.currentUser.eventBookings[i]/>
+                <BookingCard b=@sess.currentUser.eventBookings[i] />
             }
         </div>
 
     </RadzenCard>
+</body>
 }
 
 @code{
