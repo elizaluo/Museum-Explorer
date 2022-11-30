@@ -4,7 +4,8 @@
             xmlns:local1="clr-namespace:musei"
             x:Class="musei.MainPage"
             BarBackgroundColor="White"
-            SelectedTabColor="#f44336">
+            SelectedTabColor="#f44336"
+            NavigationPage.HasNavigationBar="False">
             
     <NavigationPage Title="Home">
         <x:Arguments>
