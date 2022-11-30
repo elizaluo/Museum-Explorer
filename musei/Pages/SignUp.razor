@@ -15,31 +15,41 @@
         right: 40px;
         text-align: right;
     }
+
+    .center {
+        margin-top: 200px;
+    }
 </style>
 
 <body>
     <div>
-        <RadzenText TextStyle="TextStyle.H3"
-                    TextAlign="TextAlign.Center" Style="color: #F52D11"><strong>Musei Fantastici</strong></RadzenText>
-        <RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center">Welcome to our community!</RadzenText>
-        <div>
-            <RadzenTemplateForm Submit=@OnSubmit 
-                        InvalidSubmit=@OnInvalidSubmit
-                        TItem="User"
-                        Data=@newUser>
-                <RadzenCard Class="rz-border-base-0 rz-shadow-0" Style="margin-top: 20px">
-                    <RadzenTextBox Style="border-radius: 10px" Placeholder="Full Name" @bind-Value=@newUser.name Class="w-100" Name="name"/>
-                    <RadzenRequiredValidator Component="name" Text="Name is required" Popup=false Style="position: static" />
-                    <RadzenDatePicker Class="w-100" Style="border-radius: 10px" Placeholder="Birthday" @bind-Value=@value DateFormat="d" Name="birthday"/>
-                    <RadzenRequiredValidator Component="birthday" Text="Birthday is required" Popup=false Style="position: static" />
-                    <RadzenTextBox Style="border-radius: 10px" Placeholder="Email" @bind-Value=@newUser.id Class="w-100" Name="email"/>
-                    <RadzenRequiredValidator Component="email" Text="Email is required" Popup=false Style="position: static" />
-                    <RadzenPassword Style="border-radius: 10px" Placeholder="Password" @bind-Value=@newUser.password Class="w-100" Name="password" />
-                    <RadzenRequiredValidator Component="password" Text="Password is required" Popup=false Style="position: static" />
-                </RadzenCard>
-                <RadzenButton ButtonType="ButtonType.Submit" Text="Sign Up" Style="width: 100%;"
-                              ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" />
-            </RadzenTemplateForm>
+        <div class="center">
+            <RadzenText TextStyle="TextStyle.H3"
+                        TextAlign="TextAlign.Center" Style="color: #F52D11"><strong>Musei Fantastici</strong></RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center">Welcome to our community!</RadzenText>
+            <div>
+                <RadzenTemplateForm Submit=@OnSubmit
+                                    InvalidSubmit=@OnInvalidSubmit
+                                    TItem="User"
+                                    Data=@newUser>
+                    <RadzenCard Class="rz-border-base-0 rz-shadow-0" Style="margin-top: 20px">
+                        <RadzenTextBox Style="margin: 5px; border-radius: 10px" Placeholder="Full Name" @bind-Value=@newUser.name
+                                       Class="w-100" Name="name" />
+                        <RadzenRequiredValidator Component="name" Text="Name is required" Popup=false Style="position: static" />
+                        <RadzenDatePicker Class="w-100" Style="margin: 5px; border-radius: 10px" Placeholder="Birthday"
+                                          @bind-Value=@value DateFormat="d" Name="birthday" />
+                        <RadzenRequiredValidator Component="birthday" Text="Birthday is required" Popup=false Style="position: static" />
+                        <RadzenTextBox Style="margin: 5px; border-radius: 10px" Placeholder="Email" @bind-Value=@newUser.id
+                                       Class="w-100" Name="email" />
+                        <RadzenRequiredValidator Component="email" Text="Email is required" Popup=false Style="position: static" />
+                        <RadzenPassword Style="margin: 5px; border-radius: 10px" Placeholder="Password" @bind-Value=@newUser.password
+                                        Class="w-100" Name="password" />
+                        <RadzenRequiredValidator Component="password" Text="Password is required" Popup=false Style="position: static" />
+                    </RadzenCard>
+                    <RadzenButton ButtonType="ButtonType.Submit" Text="Sign Up" Style="width: 100%;"
+                                  ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" />
+                </RadzenTemplateForm>
+            </div>
         </div>
         <div class="bottom">
             <RadzenText Style="color: #F52D11">Already a Member?</RadzenText>

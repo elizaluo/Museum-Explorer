@@ -31,6 +31,13 @@
         max-width: 100%;
         border-radius: 20px;
     }
+
+    .bottom {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        text-align: right;
+    }
 </style>
 
 <RadzenNotification />
@@ -38,7 +45,7 @@
 
 @if (sess.currentUser == null)
 {
-    <body>
+    <body style="margin-top: 200px;">
         <div>
             @if (loggingIn)
             {
@@ -48,12 +55,33 @@
                         TextAlign="TextAlign.Center" Style="color: #F52D11"><strong>Musei Fantastici</strong></RadzenText>
             <RadzenText TextStyle="TextStyle.Body1" Style="margin-bottom: 20px"
                         TextAlign="TextAlign.Center">Log in with your account and catch up on events personalized to you!</RadzenText>
-            <RadzenTemplateForm Data=@("LoginWithRegisterAndReset")>
-                <RadzenLogin UserText="Email" LoginText="Log In" Login=@(args => OnLogin(args))
-                             ResetPassword=@(args => OnResetPassword(args, "Login with register and password reset"))
-                             Register=@(args => OnRegister("Login with register and password reset")) />
+            <RadzenTemplateForm Submit=@OnLogin
+                                InvalidSubmit=@OnInvalidSubmit
+                                TItem="UserInfo"
+                                Data=@userInfo>
+
+
+                @*<RadzenLogin UserText="Email" LoginText="Log In" Login=@(args => OnLogin(args))
+                             Register=@(args => OnRegister("Login with register and password reset")) />*@
+
+
+                <RadzenCard Class="rz-border-base-0 rz-shadow-0" Style="margin-top: 20px">
+                    <RadzenTextBox Style="margin: 5px; border-radius: 10px" Placeholder="Email" @bind-Value=@userInfo.username
+                                   Class="w-100" Name="email" />
+                    <RadzenRequiredValidator Component="email" Text="Email is required" Popup=false Style="position: static" />
+                    <RadzenPassword Style="margin: 5px; border-radius: 10px" Placeholder="Password" @bind-Value=@userInfo.password
+                                    Class="w-100" Name="password" />
+                    <RadzenRequiredValidator Component="password" Text="Password is required" Popup=false Style="position: static" />
+                </RadzenCard>
+                <RadzenButton ButtonType="ButtonType.Submit" Text="Log In" Style="width: 100%;"
+                              ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" />
 
             </RadzenTemplateForm>
+            <div class="bottom">
+                <RadzenText Style="color: #F52D11">Don't have an account yet?</RadzenText>
+                <RadzenButton Variant="Variant.Text" ButtonStyle="ButtonStyle.Danger"
+                              Click=@(args => OnRegister("Login with register")) Text="Sign Up" />
+            </div>
         </div>
     </body>
 }
@@ -94,7 +122,15 @@ else
 }
 
 @code{
+    class UserInfo
+    {
+        public string username { get; set; }
+        public string password { get; set; }
+    }
+
     public bool loggingIn = false;
+
+    UserInfo userInfo = new UserInfo();
 
     async void OnResetPassword(string buttonName)
     {
@@ -106,10 +142,10 @@ else
         sess.currentUser = null;
     }
 
-    async void OnLogin(LoginArgs args)
+    async void OnLogin()
     {
         loggingIn = true;
-        sess.currentUser = await cs.LoginUser(args.Username, args.Password);
+        sess.currentUser = await cs.LoginUser(userInfo.username, userInfo.password);
         if (sess.currentUser == null)
         {
             NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Login Failed", Detail = "Username or password incorrect", Duration = 4000 });
@@ -130,4 +166,6 @@ else
     {
         await App.Current.MainPage.Navigation.PushAsync(new xForgotPassword());
     }
+
+    void OnInvalidSubmit(FormInvalidSubmitEventArgs args) { }
 }

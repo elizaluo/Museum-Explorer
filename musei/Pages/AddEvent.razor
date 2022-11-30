@@ -20,34 +20,44 @@
     .inputMargin {
         margin: 10px;
     }
+
+    body {
+        padding: 20px;
+    }
 </style>
 
-<br />
+<body>
 
+    <h3 style="color: #F52D11; text-align: center">Add Event To @sess.currentMuseum.name</h3>
 
-<h3>Add Event To @sess.currentMuseum.name</h3>
-
-<RadzenCard class="flexColumn">
-
-    <RadzenTemplateForm Submit=@OnSubmit 
-                        InvalidSubmit=@OnInvalidSubmit
-                        TItem="Event"
-                        Data=@newEvent>
-        <RadzenTextBox  Placeholder="Title" Class="w-100" @bind-Value=@newEvent.name Name="title"/>
-        <RadzenRequiredValidator Component="title" Text="Title is required" Popup=false Style="position: static" />
-        <RadzenDatePicker TValue="DateTime?" ShowTime="true" HoursStep="1" MinutesStep="15" DateFormat="MM/dd/yyyy HH:mm" Class="w-100" @bind-Value=@startTime Placeholder ="Date" Name="date"/>
-        <RadzenRequiredValidator Component="date" Text="Date is required" Popup=false Style="position: static" />
-        <RadzenTextArea Placeholder="Description" Class="w-100" Rows="12" @bind-Value=@newEvent.description Name="description"/>
-        <RadzenRequiredValidator Component="description" Text="Description is required" Popup=false Style="position: static" />
-        <RadzenNumeric TValue="int?" Placeholder="Price" Class="w-100" @bind-Value=@price Name="price"/>
-        <RadzenRequiredValidator Component="price" Text="Price is required" Popup=false Style="position: static" />
-        <RadzenFileInput @bind-Value=@photo @bind-FileName=@fileName TValue="string" Class="w-100" ChooseText="Select Image" Name="photo"/>
-        <RadzenRequiredValidator Component="photo" Text="Image is required" Popup=false Style="position: static" />
-        <RadzenButton Text="Submit" Class="w-100"
-                      IsBusy=@busy
-                      ButtonType="ButtonType.Submit" />
-    </RadzenTemplateForm>
-</RadzenCard>
+    <div class="flexColumn">
+        <RadzenTemplateForm Submit=@OnSubmit
+                            InvalidSubmit=@OnInvalidSubmit
+                            TItem="Event"
+                            Data=@newEvent>
+            <RadzenTextBox Placeholder="Title" Class="w-100" @bind-Value=@newEvent.name Name="title"
+                           Style="margin: 5px; border-radius: 10px;"/>
+            <RadzenRequiredValidator Component="title" Text="Title is required" Popup=false Style="position: static" />
+            <RadzenDatePicker TValue="DateTime?" ShowTime="true" HoursStep="1" MinutesStep="15" DateFormat="MM/dd/yyyy HH:mm"
+                              Class="w-100" @bind-Value=@startTime Placeholder="Date" Name="date"
+                              Style="margin: 5px; border-radius: 10px;"/>
+            <RadzenRequiredValidator Component="date" Text="Date is required" Popup=false Style="position: static" />
+            <RadzenTextArea Placeholder="Description" Class="w-100" Rows="12" @bind-Value=@newEvent.description Name="description"
+                            Style="margin: 5px; border-radius: 10px;"/>
+            <RadzenRequiredValidator Component="description" Text="Description is required" Popup=false Style="position: static" />
+            <RadzenNumeric TValue="int?" Placeholder="Price" Class="w-100" @bind-Value=@price Name="price"
+                           Style="margin: 5px; border-radius: 10px;"/>
+            <RadzenRequiredValidator Component="price" Text="Price is required" Popup=false Style="position: static" />
+            <RadzenFileInput @bind-Value=@photo @bind-FileName=@fileName TValue="string" Class="w-100" ChooseText="Select Image"
+                             Style="margin: 5px; border-radius: 10px;" Name="photo" />
+            <RadzenRequiredValidator Component="photo" Text="Image is required" Popup=false Style="position: static" />
+            <RadzenButton Text="Submit" Class="w-100"
+                          IsBusy=@busy
+                          ButtonType="ButtonType.Submit"
+                          Style="background-color: #F52D11; margin-top: 20px"/>
+        </RadzenTemplateForm>
+    </div>
+</body>
 
 @code {
 
