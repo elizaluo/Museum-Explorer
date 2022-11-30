@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
 using musei.Data;
+using Radzen;
 
 namespace musei;
 
@@ -19,10 +20,9 @@ public static class MauiProgram
 		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-		
+        builder.Services.AddScoped<NotificationService>();
         builder.Services.AddSingleton<CosmosService>();
         builder.Services.AddSingleton<Session>();
-
         return builder.Build();
 	}
 }

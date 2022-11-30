@@ -97,7 +97,24 @@ namespace musei.Data
 
             return null;
         }
-    }
 
-    
+        public async Task<Event> UploadEvent(Event newEvent)
+        {
+            string uri = "https://musei-functions.azurewebsites.net/api/UploadEvent?code=9Ypvvv03Ya2ay5jxV2NRFAc-TDl5-AwpqOToGUkc1k2nAzFu4CzGag==";
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync(uri, newEvent);
+                if (response.IsSuccessStatusCode)
+                {
+                    return newEvent;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
+        }
+    }
 }

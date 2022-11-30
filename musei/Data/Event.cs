@@ -2,8 +2,8 @@
 
 namespace musei.Data
 {
-	public class Event
-	{
+    public class Event
+    {
         public string id { get; set; }
 
         public string name { get; set; }
@@ -17,6 +17,17 @@ namespace musei.Data
         public int price { get; set; }
 
         public string imageURL { get; set; }
+
+        public Event()
+        {
+            this.id = null;
+            this.name = null;
+            this.museum = null;
+            this.startTime = default(DateTime);
+            this.description = null;
+            this.price = 0;
+            this.imageURL = null;
+        }
     }
 }
 
