@@ -121,5 +121,24 @@ namespace musei.Data
 
             return null;
         }
+
+        public async Task<Museum> UpdateMuseum(Museum updatedMuseum)
+        {
+            string uri = "https://musei-functions.azurewebsites.net/api/UpdateMuseum?code=Z5zeu9EOmGL8kzr7NcnG_wUbXSc4cgSUggquUUCYFQ6xAzFuB7L8WA==";
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync(uri, updatedMuseum);
+                if (response.IsSuccessStatusCode)
+                {
+                    return updatedMuseum;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
+        }
     }
 }

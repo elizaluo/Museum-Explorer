@@ -14,33 +14,25 @@
         }
         else
         {
-
             @foreach (Museum mus in cs.museums.Values)
             {
-                if (sess.currentUser == null || !sess.currentUser.isAdmin)
-                {
-                    <MuseumCardClient m=mus />
-
-                }
-                else
+                if (sess.currentUser != null && sess.currentUser.isAdmin)
                 {
                     <MuseumCardAdmin m=mus />
                 }
-
+                else
+                {
+                    <MuseumCardClient m=mus />
+                }
             }
         }
     </div>
-
 </div>
 
 
 @code{
-
     protected override async Task OnInitializedAsync()
     {
         await cs.GetMuseums();
-
-
     }
-
 }

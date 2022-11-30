@@ -60,19 +60,20 @@
 
     async void OnSubmit()
     {
-            
-            busy = true;
-            newEvent.startTime = (DateTime)startTime;
-            newEvent.price = (int)price;
-            newEvent.id = Guid.NewGuid().ToString("N");
-            newEvent.imageURL = photo.Substring(photo.IndexOf("data:image/"));
-            newEvent.museum = sess.currentMuseum.id;
-            await cs.UploadEvent(newEvent);
-            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Event Creation Successful", Duration = 40000 });
-            await Task.Delay(2000);
-            await App.Current.MainPage.Navigation.PopToRootAsync();
+        busy = true;
+        newEvent.startTime = (DateTime)startTime;
+        newEvent.price = (int)price;
+        newEvent.id = Guid.NewGuid().ToString("N");
+        sess.currentMuseum.events.Add(newEvent.id);
+        newEvent.imageURL = photo.Substring(photo.IndexOf("data:image/"));
+        newEvent.museum = sess.currentMuseum.id;
+        await cs.UploadEvent(newEvent);
+        await cs.UpdateMuseum(sess.currentMuseum);
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Event Creation Successful", Duration = 40000 });
+        await Task.Delay(2000);
+        await App.Current.MainPage.Navigation.PopToRootAsync();
     }
 
     void OnInvalidSubmit(FormInvalidSubmitEventArgs args){}
-    
+
  }

@@ -31,6 +31,9 @@
     }
 </style>
 
+<RadzenNotification />
+
+
 @if (sess.currentUser == null)
 {
     <body>
@@ -107,7 +110,9 @@ else
         sess.currentUser = await cs.LoginUser(args.Username, args.Password);
         if (sess.currentUser == null)
         {
-            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error Summary", Detail = "Error Detail", Duration = 4000 });
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Login Failed", Detail = "Username or password incorrect", Duration = 4000 });
+            loggingIn = false;
+            StateHasChanged();
             return;
         }
         StateHasChanged();
