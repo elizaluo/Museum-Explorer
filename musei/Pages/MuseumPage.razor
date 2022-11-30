@@ -17,6 +17,26 @@
         gap: 10px;
     }
 
+    .info {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+    }
+
+    .address {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row;
+        margin-right: 40px;
+    }
+
+    .hours {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row;
+    }
+
     .eventNewsList {
         display: flex;
         flex-direction: column;
@@ -45,26 +65,33 @@
     <h3 style="text-align: center; color: #F52D11">@sess.currentMuseum.name</h3>
 
     <div class="flexColumn">
-        <div class="flexRow">
-            <div class="flexRow">
+        <div class="info">
+            <div class="address">
                 <RadzenIcon Icon="place" />
-                <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right"
+                <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left"
                             Style="color: #F52D11">@sess.currentMuseum.address</RadzenText>
             </div>
-            <div class="flexRow">
+            <div class="hours">
                 <RadzenIcon Icon="schedule" />
                 <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left"
-                            Style="color: #F52D11">@sess.currentMuseum.hours</RadzenText>
+                Style="color: #F52D11">@sess.currentMuseum.hours</RadzenText>
             </div>
         </div>
-        <h4>Museum Events</h4>
-        <div class="eventNewsList">
-            @for (int i = 0; i < sess.currentMuseum.events.Count; i++)
-            {
 
-                <EventCard e=cs.events[sess.currentMuseum.events[i]] />
-            }
-        </div>
+        <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
+            <div>
+                <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Museum Events</strong></RadzenText>
+                <div class="eventNewsList">
+                    @for (int i = 0; i < sess.currentMuseum.events.Count; i++)
+                    {
+                        <EventCard e=cs.events[sess.currentMuseum.events[i]] />
+                    }
+                </div>
+            </div>
+
+        </RadzenCard>
+
+
     </div>
 </body>
 
