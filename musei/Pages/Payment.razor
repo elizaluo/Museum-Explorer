@@ -43,22 +43,22 @@
 </style>
 
 <body>
-    <RadzenCard Class="rz-border-base-500 rz-shadow-0" Style="margin-bottom: 20px; background-color: #F5F5F5; border-radius: 20px;" >
+    <RadzenCard Class="rz-border-base-500 rz-shadow-0" Style="margin-bottom: 20px; background-color: #F5F5F5; border-radius: 20px;">
         <div class="flexColumn">
             <div>
                 <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11;"><strong>Price details</strong></RadzenText>
             </div>
             <div class="flexRow">
                 <div class="flexStart">
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11;">@NumberOfTickets Ticket(s)</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11;">@sess.currentBooking.people.Count Ticket(s)</RadzenText>
                     <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11;">Taxes and fees</RadzenText>
                     <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11;">Total</RadzenText>
 
                 </div>
                 <div class="flexEnd">
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11;">€@TicketPrice</RadzenText>
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11;">€@TaxesFees</RadzenText>
-                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11;">€@Total</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11;">€@totalTicketPrice</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11;">€@taxesFees</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11;">€@total</RadzenText>
                 </div>
             </div>
         </div>
@@ -77,17 +77,34 @@
 
 
 @code {
-    [Parameter]
-    public int NumberOfTickets { get; set; }
 
-    [Parameter]
-    public int TicketPrice { get; set; }
+    public double totalTicketPrice { get; set; }
 
-    [Parameter]
-    public int TaxesFees { get; set; }
+    public double taxesFees { get; set; }
 
-    [Parameter]
-    public int Total { get; set; }
+    public double total { get; set; }
+
+    public double calculateTicketPrice(int numberOfTickets, double pricePerTicket)
+    {
+        return (double)numberOfTickets * pricePerTicket;
+    }
+
+    public double calculateTotalPrice(double Total, double pricePerTicket)
+    {
+        return totalTicketPrice + taxesFees;
+    }
+
+    public double calculateTaxes(double Total, double taxRate)
+    {
+        return totalTicketPrice * taxRate;
+    }
+
+    public double truncate(double num)
+    {
+        string stringNum = num.ToString();
+        stringNum = stringNum.Substring(0, stringNum.IndexOf(".") + 2);
+        return Convert.ToDouble(stringNum);
+    }
 
     async void OnPayNow()
     {
@@ -99,4 +116,13 @@
         //sess.currentBooking = null;
         await App.Current.MainPage.Navigation.PushAsync(new xBookingConfirmation());
     }
+
+    protected override void OnInitialized()
+    {
+        totalTicketPrice = calculateTicketPrice(sess.currentBooking.people.Count, sess.currentEvent.price);
+        taxesFees = truncate(calculateTaxes(totalTicketPrice, 0.1));
+        total = calculateTotalPrice(totalTicketPrice, taxesFees);
+    }
+
+
 }
