@@ -63,20 +63,40 @@
             </div>
         </div>
     </RadzenCard>
-    <div>
-        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Name on card" />
-        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Debit/Credit card number" />
-        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%; " Placeholder="Expiration date MM/YY" />
-        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Security code" />
-        <RadzenAutoComplete Style="border-radius: 10px; margin-bottom: 10px; width: 100%;" Placeholder="Zip code" />
-    </div>
-    <RadzenButton Click=@(args => OnPayNow()) class="mainColor" Style="width: 100%;"
-                  ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Text="Pay now" />
+    <RadzenTemplateForm Submit=@OnSubmit
+                        InvalidSubmit=@OnInvalidSubmit
+                        TItem="PaymentCard"
+                        Data=@newPayment>
+        <div>
+            <RadzenAutoComplete Style="border-radius: 10px; width: 100%;" @bind-Value=@newPayment.name Placeholder="Name on card" Name="name"/>
+            <RadzenRequiredValidator Component="name" Text="Name is required" Popup=false Style="position: static" />
+            <RadzenAutoComplete Style="border-radius: 10px; width: 100%;" @bind-Value=@newPayment.cardNum Placeholder="Debit/Credit ca rd number" Name="creditCard"/>
+            <RadzenRequiredValidator Component="creditCard" Text="Debit/Credit card number is required" Popup=false Style="position: static" />
+            <RadzenAutoComplete Style="border-radius: 10px; width: 100%; " @bind-Value=@newPayment.expiration Placeholder ="Expiration date MM/YY" Name="expiration" />
+            <RadzenRequiredValidator Component="expiration" Text="Expiration date is required" Popup=false Style="position: static" />
+            <RadzenAutoComplete Style="border-radius: 10px; width: 100%;" @bind-Value=@newPayment.securityCode Placeholder ="Security code" Name="securityCode" />
+            <RadzenRequiredValidator Component="securityCode" Text="Security code is required" Popup=false Style="position: static" />
+            <RadzenAutoComplete Style="border-radius: 10px; width: 100%;" @bind-Value=@newPayment.zipCode Placeholder ="Zip code" Name="zip" />
+            <RadzenRequiredValidator Component="zip" Text="Zip code is required" Popup=false Style="position: static" />
+        </div>
+        <RadzenButton class="mainColor" Style="width: 100%;"
+                      ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Text="Pay now" ButtonType="ButtonType.Submit" />
+    </RadzenTemplateForm>
 </body>
 
 
 
 @code {
+    class PaymentCard
+    {
+        public string name { get; set; }
+        public string cardNum { get; set; }
+        public string expiration { get; set; }
+        public string securityCode { get; set; }
+        public string zipCode { get; set; }
+    }
+
+    PaymentCard newPayment = new PaymentCard();
 
     public double totalTicketPrice { get; set; }
 
@@ -106,7 +126,7 @@
         return Convert.ToDouble(stringNum);
     }
 
-    async void OnPayNow()
+    async void OnSubmit()
     {
         sess.currentUser.eventBookings.Add(sess.currentBooking);
         Console.WriteLine(sess.currentUser.eventBookings[0]);
@@ -116,6 +136,8 @@
         //sess.currentBooking = null;
         await App.Current.MainPage.Navigation.PushAsync(new xBookingConfirmation());
     }
+
+    void OnInvalidSubmit(FormInvalidSubmitEventArgs args) { }
 
     protected override void OnInitialized()
     {
