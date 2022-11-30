@@ -88,10 +88,30 @@ namespace musei.Data
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     User user = JsonSerializer.Deserialize<User>(content);
-                    if (user.password == password)
+                    if (user.password != password)
                     {
                         return null;
                     }
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
+        }
+
+        public async Task<Event> UploadEvent(Event newEvent)
+        {
+            string uri = "https://musei-functions.azurewebsites.net/api/UploadEvent?code=9Ypvvv03Ya2ay5jxV2NRFAc-TDl5-AwpqOToGUkc1k2nAzFu4CzGag==";
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync(uri, newEvent);
+                if (response.IsSuccessStatusCode)
+                {
+                    return newEvent;
                 }
             }
             catch (Exception ex)
@@ -102,6 +122,4 @@ namespace musei.Data
             return null;
         }
     }
-
-    
 }

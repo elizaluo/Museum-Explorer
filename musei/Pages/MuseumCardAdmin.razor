@@ -2,18 +2,20 @@
 
 @using Radzen
 @using Microsoft.Maui.Graphics
+@using musei.Data
+@inject Session sess
 
 <link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
 
 <RadzenCard>
     <div class="flexRow">
-        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@MuseumName">
-            <img src=@ImagePath />
-        </RadzenButton>
-        <div class="leftAlign">
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@MuseumName" Size="ButtonSize.Large" />
-            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMap("Large button")) Text="@Address" Icon="account_balance" />
-            <RadzenButton Variant="Variant.Text" Text="@OpeningHours" Icon="event" />
+            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button"))>
+                <img src=@m.imageURL />
+            </RadzenButton>
+        <div>
+            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button")) Text="@m.name" Size="ButtonSize.Large" />
+            <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMap("Large button")) Text="@m.address" Icon="account_balance" />
+            <RadzenButton Variant="Variant.Text" Text="@m.hours" Icon="event" />
             <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickAdd("Large button")) Text="Add" ButtonStyle="ButtonStyle.Danger" />
 
         </div>
@@ -22,16 +24,7 @@
 
 @code {
     [Parameter]
-    public string MuseumName { get; set; }
-
-    [Parameter]
-    public string Address { get; set; }
-
-    [Parameter]
-    public string OpeningHours { get; set; }
-
-    [Parameter]
-    public string ImagePath { get; set; }
+    public Museum m { get; set; } = null;
 
     async void OnClickEvent(string buttonName)
     {
@@ -40,6 +33,7 @@
 
     async void OnClickAdd(string buttonName)
     {
+        sess.currentMuseum = m;
         await App.Current.MainPage.Navigation.PushAsync(new xAddEvent());
     }
     void OnClickMap(string buttonName)
