@@ -6,7 +6,9 @@
 @using musei.Data
 @inject CosmosService cs
 @inject Session sess
+@inject NotificationService NotificationService
 
+<RadzenNotification />
 <link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
 <style>
     .flexColumn {
@@ -27,11 +29,13 @@
     <RadzenDatePicker TValue="DateTime?" ShowTime="true" HoursStep="1" MinutesStep="15" DateFormat="MM/dd/yyyy HH:mm" Class="w-100" @bind-Value=@startTime Placeholder ="Date"/>
     <RadzenTextArea Placeholder="Description" Class="w-100" Rows="12" @bind-Value=@newEvent.description />
     <RadzenNumeric TValue="int?" Placeholder="Price" Class="w-100" @bind-Value=@price/>
-    <RadzenUpload Multiple="false" Accept="image/*" Url="upload/single" class="w-100" ChooseText="Select Image" />
+    <RadzenFileInput @bind-Value=@photo @bind-FileName=@fileName TValue="string" Class="w-100" ChooseText="Select Image" />
 </RadzenCard>
 
 <RadzenCard class="row align-items-center">
-    <RadzenButton Text="Submit" class="align-items-center" Click=@(args => OnNext()) />
+    <RadzenButton Text="Submit" Class="w-100"
+                  IsBusy=@busy
+                  Click=@(args => OnNext(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Event Creation Successful", Duration = 40000 })) />
 </RadzenCard>
 
 @code {
@@ -39,18 +43,31 @@
     DateTime? startTime;
     int? price;
     Event newEvent = new Event();
+    public string photo;
+    public string fileName;
+    bool busy = false;
 
-    async void OnNext()
+    void ShowNotification(NotificationMessage message)
     {
-        if (!(startTime != null && price != null))
-        {
+        NotificationService.Notify(message);
+    }
 
-        }
-        else
+    async void OnNext(NotificationMessage message)
+    {
+        if (startTime != null && price != null)
         {
+            busy = true;
             newEvent.startTime = (DateTime)startTime;
             newEvent.price = (int)price;
+            newEvent.id = Guid.NewGuid().ToString("N");
+            newEvent.imageURL = photo.Substring(photo.IndexOf("data:image/"));
+            newEvent.museum = sess.currentMuseum.id;
+            await cs.UploadEvent(newEvent);
+            NotificationService.Notify(message);
+            Console.WriteLine(newEvent.id);
+            await Task.Delay(2000);
             await App.Current.MainPage.Navigation.PopToRootAsync();
         }
     }
+
 }
