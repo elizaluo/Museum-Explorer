@@ -49,7 +49,6 @@
         margin-top: 10px;
         width: 100%
     }
-
 </style>
 
 <RadzenCard Style="border-radius: 20px; margin: 20px; background-color: #EFEFF0">
@@ -58,17 +57,17 @@
             <img src=@m.imageURL />
             <div class="buttons">
                 <RadzenButton Variant="Variant.Text" ButtonStyle="ButtonStyle.Danger" Style="width"
-                              Click=@(args => OnClickEvent("Large button")) Text="@m.name" Size="ButtonSize.Large" />
-                <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickAdd("Large button")) Text="Add"
-                              ButtonStyle="ButtonStyle.Danger"/>
+                              Click=@(args => OnClickMuseum()) Text="@m.name" Size="ButtonSize.Large" />
+                <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickAdd()) Text="Add"
+                              ButtonStyle="ButtonStyle.Danger" />
             </div>
             <RadzenButton Variant="Variant.Text" ButtonStyle="ButtonStyle.Danger"
-                          Click=@(args => OnClickMap("Large button")) Text="@m.address" Icon="account_balance" />
+                          Click=@(args => OnClickMap()) Text="@m.address" Icon="account_balance" />
             <RadzenButton Variant="Variant.Text" ButtonStyle="ButtonStyle.Danger" Text="@m.hours" Icon="event" />
         </div>
         <div class="more">
-            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickEvent("Large button")) Text=">"
-                          ButtonStyle="ButtonStyle.Danger" Style="height:100%"/>
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickMuseum()) Text=">"
+                          ButtonStyle="ButtonStyle.Danger" Style="height:100%" />
         </div>
     </div>
 </RadzenCard>
@@ -77,17 +76,18 @@
     [Parameter]
     public Museum m { get; set; } = null;
 
-    async void OnClickEvent(string buttonName)
+    async void OnClickMuseum()
     {
+        sess.currentMuseum = m;
         await App.Current.MainPage.Navigation.PushAsync(new xMuseumPage());
     }
 
-    async void OnClickAdd(string buttonName)
+    async void OnClickAdd()
     {
         sess.currentMuseum = m;
         await App.Current.MainPage.Navigation.PushAsync(new xAddEvent());
     }
-    void OnClickMap(string buttonName)
+    void OnClickMap()
     {
     }
 }
