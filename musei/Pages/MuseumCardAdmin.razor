@@ -7,7 +7,51 @@
 
 <link rel="stylesheet" href="~/@(nameof(musei)).styles.css" />
 
-<RadzenCard>
+<style>
+    .flexRow {
+        display: flex;
+        flex-direction: row;
+        height: 330px;
+        width: 100%;
+    }
+
+    .rightAlign {
+        margin-left: auto;
+        margin-right: 0;
+        align-content: center;
+        justify-content: center;
+    }
+
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 60%;
+    }
+
+    .content {
+        flex-grow: 3;
+        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .more {
+        flex-grow: 1;
+        margin-left: 10px;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 10px;
+        width: 100%
+    }
+
+</style>
+
+@*<RadzenCard>
     <div class="flexRow">
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent("Large button"))>
                 <img src=@m.imageURL />
@@ -17,7 +61,27 @@
             <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMap("Large button")) Text="@m.address" Icon="account_balance" />
             <RadzenButton Variant="Variant.Text" Text="@m.hours" Icon="event" />
             <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickAdd("Large button")) Text="Add" ButtonStyle="ButtonStyle.Danger" />
+        </div>
+    </div>
+</RadzenCard>*@
 
+<RadzenCard Style="border-radius: 20px; margin: 20px; background-color: #EFEFF0">
+    <div class="flexRow">
+        <div class="content">
+            <img src=@m.imageURL />
+            <div class="buttons">
+                <RadzenButton Variant="Variant.Text" ButtonStyle="ButtonStyle.Danger" Style="width"
+                              Click=@(args => OnClickEvent("Large button")) Text="@m.name" Size="ButtonSize.Large" />
+                <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickAdd("Large button")) Text="Add"
+                              ButtonStyle="ButtonStyle.Danger"/>
+            </div>
+            <RadzenButton Variant="Variant.Text" ButtonStyle="ButtonStyle.Danger"
+                          Click=@(args => OnClickMap("Large button")) Text="@m.address" Icon="account_balance" />
+            <RadzenButton Variant="Variant.Text" ButtonStyle="ButtonStyle.Danger" Text="@m.hours" Icon="event" />
+        </div>
+        <div class="more">
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickEvent("Large button")) Text=">"
+                          ButtonStyle="ButtonStyle.Danger" Style="height:100%"/>
         </div>
     </div>
 </RadzenCard>

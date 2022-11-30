@@ -4,17 +4,37 @@
 @inject CosmosService cs
 @inject Session sess
 
-<br />
+<style>
+    .flexColumn {
+        display: flex;
+        flex-direction: column;
+    }
 
-<div class="flexColumn">
-    <div class="museumList">
-        @if (cs.museums.Count == 0)
-        {
-            <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
-        }
-        else
-        {
-            @foreach (Museum mus in cs.museums.Values)
+    .flexRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    eventNewsList {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    body {
+        padding: 20px;
+    }
+</style>
+
+<body>
+    <div class="flexColumn">
+        <div class="museumList">
+            @if (cs.museums.Count == 0)
+            {
+                <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+            }
+            else
             {
                 if (sess.currentUser != null && sess.currentUser.isAdmin)
                 {
@@ -25,9 +45,11 @@
                     <MuseumCardClient m=mus />
                 }
             }
-        }
+        </div>
     </div>
-</div>
+
+</body>
+
 
 
 @code{
