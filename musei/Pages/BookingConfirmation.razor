@@ -20,11 +20,21 @@
         font-size: 250px;
         color: #F52D11;
     }
+
+    .bottom {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        text-align: right;
+    }
 </style>
 
 <h3 style="text-align: center; color: #F52D11">Booking Confirmed!</h3>
 
-<RadzenButton Click=@(args => OnClickDone())>Done</RadzenButton>
+<div class="bottom">
+    <RadzenButton Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Click=@(args => OnClickDone())>Done</RadzenButton>
+</div>
+
 <div class="container-fluid">
     <div class="row d-flex px-3">
         <div class="col-xl-6 flexColumn">

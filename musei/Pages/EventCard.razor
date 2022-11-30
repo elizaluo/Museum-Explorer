@@ -33,27 +33,28 @@
     }
 </style>
 
-<RadzenCard class="flexColumn">
+<RadzenCard class="flexColumn rz-shadow-0" Style="border-radius: 20px;">
     <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent())>
         <img src=@e.imageURL />
     </RadzenButton>
     <div class="flexRow">
-        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent()) Text=@e.name Size="ButtonSize.Large" />
+        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent()) Text=@e.name Size="ButtonSize.Large"
+                      Style="color: #F52D11;" />
 
         <div class="textIcon">
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@e.startTime.ToShortTimeString() </RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11">@e.startTime.ToShortTimeString() </RadzenText>
             <RadzenIcon Icon="schedule" />
         </div>
     </div>
     <div class="flexRow">
-        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@cs.museums[e.museum].name</RadzenText>
+        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11; margin-left: 20px">@cs.museums[e.museum].name</RadzenText>
         <div class="textIcon">
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@e.startTime.ToShortDateString()</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11">@e.startTime.ToShortDateString()</RadzenText>
             <RadzenIcon Icon="event" />
         </div>
     </div>
 
-    <div>@e.description</div>
+    <div style="color: black; margin-left: 20px">@e.description</div>
 </RadzenCard>
 
 @code {

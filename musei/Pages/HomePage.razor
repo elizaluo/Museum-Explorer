@@ -12,23 +12,32 @@
         flex-direction: column;
         gap: 20px;
     }
+
+    body {
+        padding: 20px;
+    }
 </style>
 
-<br />
-<div class="eventNewsList">
+<body>
+    <div class="eventNewsList">
 
-    @if (cs.events.Count == 0)
-    {
-        <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
-    }
-    else
-    {
-        foreach (Event ev in cs.events.Values)
+        @if (cs.events.Count == 0)
         {
-            <EventCard e=ev/>
+            <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
         }
-    }
-</div>
+        else
+        {
+            foreach (Event ev in cs.events.Values)
+            {
+                <RadzenCard Class="rz-shadow-2"
+                            Style="border-radius: 20px; padding: 10px; margin-top: 10px; margin-bottom: 10px; background-color: #EFEFF0 ">
+                    <EventCard e=ev />
+                </RadzenCard>
+
+            }
+        }
+    </div>
+</body>
 
 @code {
     protected override async Task OnInitializedAsync()
