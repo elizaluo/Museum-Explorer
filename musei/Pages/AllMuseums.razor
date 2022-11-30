@@ -36,13 +36,16 @@
             }
             else
             {
-                if (sess.currentUser != null && sess.currentUser.isAdmin)
+                @foreach (Museum mus in cs.museums.Values)
                 {
-                    <MuseumCardAdmin m=mus />
-                }
-                else
-                {
-                    <MuseumCardClient m=mus />
+                    if (sess.currentUser != null && sess.currentUser.isAdmin)
+                    {
+                        <MuseumCardAdmin m=mus />
+                    }
+                    else
+                    {
+                        <MuseumCardClient m=mus />
+                    }
                 }
             }
         </div>
