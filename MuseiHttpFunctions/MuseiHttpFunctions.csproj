@@ -9,6 +9,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Microsoft.Azure.WebJobs.Extensions.CosmosDB" />
+    <None Remove="Microsoft.Azure.WebJobs.Extensions.Storage" />
+    <None Remove="Azure.Storage.Blobs" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

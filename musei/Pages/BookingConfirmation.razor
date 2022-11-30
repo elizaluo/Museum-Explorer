@@ -24,7 +24,6 @@
 
 <h3 style="text-align: center; color: #F52D11">Booking Confirmed!</h3>
 
-<RadzenButton Click=@(args => OnClickDone())>Done</RadzenButton>
 <div class="container-fluid">
     <div class="row d-flex px-3">
         <div class="col-xl-6 flexColumn">
@@ -36,6 +35,8 @@
                 Confirmation and booking information has been sent to your email(s).
             </RadzenText>
             <RadzenImage Path="images/randmuseum.png" Style="width: 90%; margin: 1rem; align-self: center" />
+            <RadzenButton  ButtonStyle="ButtonStyle.Danger"  Click=@(args => OnClickDone())>Done</RadzenButton>
+
         </div>
     </div>
 </div>

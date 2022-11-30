@@ -77,7 +77,8 @@ namespace musei.Data
 
             return null;
         }
-        public async Task<User> LoginUser(string email)
+
+        public async Task<User> LoginUser(string email, string password)
         {
             string uri = $"https://musei-functions.azurewebsites.net/api/login/{email}/{email}?code=A0wog4aBVSCpLG4wLQgwfMAmVSvhqzqWztx6_gUCO9nZAzFumUR9OQ==";
             try
@@ -87,7 +88,10 @@ namespace musei.Data
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     User user = JsonSerializer.Deserialize<User>(content);
-                    return user;
+                    if (user.password == password)
+                    {
+                        return null;
+                    }
                 }
             }
             catch (Exception ex)

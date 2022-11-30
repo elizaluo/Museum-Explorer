@@ -28,7 +28,4 @@ namespace MuseiHttpFunctions
             return new OkObjectResult(user);
         }
     }
-
-
 }
-
