@@ -26,6 +26,7 @@
         object-fit: cover;
         width: 100%;
         height: 60%;
+        border-radius: 20px;
     }
 
     .content {
@@ -100,7 +101,7 @@
     }
 
     protected override void OnInitialized()
-{
+    {
         Console.WriteLine($"\n\nON INIT\ncurrent user = {sess.currentUser}\n{m}\n");
         if (sess.currentUser != null && m != null && sess.currentUser.followedMuseums.Contains(m.id))
         {

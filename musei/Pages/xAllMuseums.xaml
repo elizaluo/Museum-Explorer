@@ -9,5 +9,4 @@
             <RootComponent Selector="#app" ComponentType="{x:Type local:AllMuseums}" />
         </BlazorWebView.RootComponents>
     </BlazorWebView>
-
 </ContentPage>

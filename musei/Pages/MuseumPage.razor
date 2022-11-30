@@ -22,37 +22,51 @@
         flex-direction: column;
         gap: 10px;
     }
+
+    body {
+        padding: 20px;
+    }
+
+    img {
+        border-radius: 20px;
+    }
+
+    .museo-img {
+        object-fit: cover;
+        width: 100%;
+        height: 200px;
+        margin-bottom: 10px;
+    }
 </style>
 
-<br />
-<img src=@sess.currentMuseum.imageURL />
-<br />
-<h3 style="text-align:center">@sess.currentMuseum.name</h3>
+<body>
+    <img class ="museo-img" src=@sess.currentMuseum.imageURL />
 
-<br />
+    <h3 style="text-align: center; color: #F52D11">@sess.currentMuseum.name</h3>
 
-<div class="flexColumn">
-    <div class="flexRow">
+    <div class="flexColumn">
         <div class="flexRow">
-            <RadzenIcon Icon="place" />
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right">@sess.currentMuseum.address</RadzenText>
+            <div class="flexRow">
+                <RadzenIcon Icon="place" />
+                <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right"
+                            Style="color: #F52D11">@sess.currentMuseum.address</RadzenText>
+            </div>
+            <div class="flexRow">
+                <RadzenIcon Icon="schedule" />
+                <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left"
+                            Style="color: #F52D11">@sess.currentMuseum.hours</RadzenText>
+            </div>
         </div>
-        <div class="flexRow">
-            <RadzenIcon Icon="schedule" />
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left">@sess.currentMuseum.hours</RadzenText>
+        <h4>Museum Events</h4>
+        <div class="eventNewsList">
+            @for (int i = 0; i < sess.currentMuseum.events.Count; i++)
+            {
+
+                <EventCard e=cs.events[sess.currentMuseum.events[i]] />
+            }
         </div>
     </div>
-    <br />
-    <br />
-    <h4>Museum Events</h4>
-    <div class="eventNewsList">
-        @for (int i = 0; i < sess.currentMuseum.events.Count; i++)
-        {
-
-            <EventCard e=cs.events[sess.currentMuseum.events[i]] />
-        }
-    </div>
-</div>
+</body>
 
 @code {
     public string ImagePath { get; set; } = "Images/randmuseum.png";

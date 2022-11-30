@@ -5,6 +5,8 @@
 @using Microsoft.Maui.Layouts
 @inject CosmosService cs
 @inject Session sess
+@inject NotificationService NotificationService
+
 
 <style>
     body {
@@ -26,9 +28,12 @@
 
     img {
         max-width: 100%;
+        border-radius: 20px;
     }
-  
 </style>
+
+<RadzenNotification />
+
 
 @if (sess.currentUser == null)
 {
@@ -44,46 +49,47 @@
                         TextAlign="TextAlign.Center">Log in with your account and catch up on events personalized to you!</RadzenText>
             <RadzenTemplateForm Data=@("LoginWithRegisterAndReset")>
                 <RadzenLogin UserText="Email" LoginText="Log In" Login=@(args => OnLogin(args))
-                                ResetPassword=@(args => OnResetPassword(args, "Login with register and password reset"))
-                                Register=@(args => OnRegister("Login with register and password reset")) />
-            </RadzenTemplateForm>  
+                             ResetPassword=@(args => OnResetPassword(args, "Login with register and password reset"))
+                             Register=@(args => OnRegister("Login with register and password reset")) />
+
+            </RadzenTemplateForm>
         </div>
     </body>
 }
 else
 {
-<body>
-    <div class="flexRow" style="justify-content:space-evenly">
-        <RadzenText TextAlign="TextAlign.Left">
-            <RadzenButton Variant="Variant.Flat" Click=@(args => OnResetPassword("reset password")) Text="Reset Password"
-                          ButtonStyle="ButtonStyle.Danger" />
-        </RadzenText>
-        <RadzenText TextAlign="TextAlign.Right">
-            <RadzenButton Variant="Variant.Flat" Click=@(args => OnLogout("logging out")) Text="Log Out"
-                          ButtonStyle="ButtonStyle.Danger" />
-        </RadzenText>
-    </div>
-
-    <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
-        <div>
-            <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Personal Information</strong></RadzenText>
-            <RadzenText TextStyle="TextStyle.H5">Name: @sess.currentUser.name</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5">Birthday: @sess.currentUser.birthDate.ToLongDateString()</RadzenText>
-            <RadzenText TextStyle="TextStyle.H5">Email: @sess.currentUser.id</RadzenText>
-        </div>
-    </RadzenCard>
-
-    <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
-        <div>
-            <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Your Booking(s)</strong></RadzenText>
-            @for (int i = 0; i < sess.currentUser.eventBookings.Count; i++)
-            {
-                <BookingCard b=@sess.currentUser.eventBookings[i] />
-            }
+    <body>
+        <div class="flexRow" style="justify-content:space-evenly">
+            <RadzenText TextAlign="TextAlign.Left">
+                <RadzenButton Variant="Variant.Flat" Click=@(args => OnResetPassword("reset password")) Text="Reset Password"
+                              ButtonStyle="ButtonStyle.Danger" />
+            </RadzenText>
+            <RadzenText TextAlign="TextAlign.Right">
+                <RadzenButton Variant="Variant.Flat" Click=@(args => OnLogout("logging out")) Text="Log Out"
+                              ButtonStyle="ButtonStyle.Danger" />
+            </RadzenText>
         </div>
 
-    </RadzenCard>
-</body>
+        <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
+            <div>
+                <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Personal Information</strong></RadzenText>
+                <RadzenText TextStyle="TextStyle.H5">Name: @sess.currentUser.name</RadzenText>
+                <RadzenText TextStyle="TextStyle.H5">Birthday: @sess.currentUser.birthDate.ToLongDateString()</RadzenText>
+                <RadzenText TextStyle="TextStyle.H5">Email: @sess.currentUser.id</RadzenText>
+            </div>
+        </RadzenCard>
+
+        <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
+            <div>
+                <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Your Booking(s)</strong></RadzenText>
+                @for (int i = 0; i < sess.currentUser.eventBookings.Count; i++)
+                {
+                    <BookingCard b=@sess.currentUser.eventBookings[i] />
+                }
+            </div>
+
+        </RadzenCard>
+    </body>
 }
 
 @code{
@@ -102,7 +108,14 @@ else
     async void OnLogin(LoginArgs args)
     {
         loggingIn = true;
-        sess.currentUser = await cs.LoginUser(args.Username);
+        sess.currentUser = await cs.LoginUser(args.Username, args.Password);
+        if (sess.currentUser == null)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Login Failed", Detail = "Username or password incorrect", Duration = 4000 });
+            loggingIn = false;
+            StateHasChanged();
+            return;
+        }
         StateHasChanged();
         loggingIn = false;
     }

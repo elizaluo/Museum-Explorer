@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:musei.Pages"
              x:Class="musei.xBookingConfirmation"
              Title="Booking Confirmation"
-             NavigationPage.HasBackButton="False">
+             NavigationPage.HasNavigationBar="False">
     <BlazorWebView HostPage="wwwroot/index.html">
         <BlazorWebView.RootComponents>
             <RootComponent Selector="#app" ComponentType="{x:Type local:BookingConfirmation}" />

@@ -2,6 +2,7 @@
 @using Radzen
 @using musei.Data
 @inject CosmosService cs
+@inject Session sess
 
 <style>
     .flexColumn {
@@ -37,15 +38,24 @@
             {
                 @foreach (Museum mus in cs.museums.Values)
                 {
-                    <MuseumCardClient m=mus />
+                    if (sess.currentUser != null && sess.currentUser.isAdmin)
+                    {
+                        <MuseumCardAdmin m=mus />
+                    }
+                    else
+                    {
+                        <MuseumCardClient m=mus />
+                    }
                 }
             }
         </div>
     </div>
+
 </body>
 
 
-@code {
+
+@code{
     protected override async Task OnInitializedAsync()
     {
         await cs.GetMuseums();

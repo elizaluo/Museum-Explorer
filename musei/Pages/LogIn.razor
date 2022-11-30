@@ -30,10 +30,8 @@
 
     async void OnLogin(LoginArgs args)
     {
-        sess.currentUser = await cs.LoginUser(args.Username);
+        sess.currentUser = await cs.LoginUser(args.Username, args.Password);
         await App.Current.MainPage.Navigation.PopToRootAsync();
-
-        //await App.Current.MainPage.Navigation.PushAsync(new xHomePage());
     }
 
     async void OnRegister(string name)

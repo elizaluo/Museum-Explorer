@@ -77,7 +77,8 @@ namespace musei.Data
 
             return null;
         }
-        public async Task<User> LoginUser(string email)
+
+        public async Task<User> LoginUser(string email, string password)
         {
             string uri = $"https://musei-functions.azurewebsites.net/api/login/{email}/{email}?code=A0wog4aBVSCpLG4wLQgwfMAmVSvhqzqWztx6_gUCO9nZAzFumUR9OQ==";
             try
@@ -87,6 +88,10 @@ namespace musei.Data
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     User user = JsonSerializer.Deserialize<User>(content);
+                    if (user.password != password)
+                    {
+                        return null;
+                    }
                     return user;
                 }
             }
@@ -107,6 +112,25 @@ namespace musei.Data
                 if (response.IsSuccessStatusCode)
                 {
                     return newEvent;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
+        }
+
+        public async Task<Museum> UpdateMuseum(Museum updatedMuseum)
+        {
+            string uri = "https://musei-functions.azurewebsites.net/api/UpdateMuseum?code=Z5zeu9EOmGL8kzr7NcnG_wUbXSc4cgSUggquUUCYFQ6xAzFuB7L8WA==";
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync(uri, updatedMuseum);
+                if (response.IsSuccessStatusCode)
+                {
+                    return updatedMuseum;
                 }
             }
             catch (Exception ex)
