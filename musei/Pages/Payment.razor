@@ -70,7 +70,7 @@
         <div>
             <RadzenAutoComplete Style="border-radius: 10px; width: 100%;" @bind-Value=@newPayment.name Placeholder="Name on card" Name="name"/>
             <RadzenRequiredValidator Component="name" Text="Name is required" Popup=false Style="position: static" />
-            <RadzenAutoComplete Style="border-radius: 10px; width: 100%;" @bind-Value=@newPayment.cardNum Placeholder="Debit/Credit ca rd number" Name="creditCard"/>
+            <RadzenAutoComplete Style="border-radius: 10px; width: 100%;" @bind-Value=@newPayment.cardNum Placeholder="Debit/Credit card number" Name="creditCard"/>
             <RadzenRequiredValidator Component="creditCard" Text="Debit/Credit card number is required" Popup=false Style="position: static" />
             <RadzenAutoComplete Style="border-radius: 10px; width: 100%; " @bind-Value=@newPayment.expiration Placeholder ="Expiration date MM/YY" Name="expiration" />
             <RadzenRequiredValidator Component="expiration" Text="Expiration date is required" Popup=false Style="position: static" />
