@@ -11,6 +11,8 @@
     .flexRow {
         display: flex;
         flex-direction: row;
+        align-items: center;
+        height: 50px;
     }
 
     .flexColumn {
@@ -22,9 +24,11 @@
     .textIcon {
         display: flex;
         flex-direction: row;
+        align-items: center;
         margin-left: auto;
         margin-right: 0;
-        justify-content: flex-end;
+        justify-content: space-between;
+        height: 100%;
         gap: 5px;
     }
 
@@ -43,31 +47,40 @@
     <div class="flexRow">
         <RadzenButton Variant="Variant.Text" Click=@(args => OnClickEvent()) Text=@e.name Size="ButtonSize.Large"
                       Style="color: #F52D11;" />
-
         <div class="textIcon">
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11">@e.startTime.ToShortTimeString() </RadzenText>
-            <RadzenIcon Icon="schedule" />
+            @*<RadzenText TextStyle="TextStyle.Button" TextAlign="TextAlign.Right" Style="color: #F52D11">@e.startTime.ToShortTimeString() </RadzenText>*@
+            <p style="color: #F52D11">@e.startTime.ToShortTimeString()</p>
+            <RadzenIcon Icon="schedule"  style="color: #F52D11; margin-right: 10px"/>
         </div>
     </div>
     <div class="flexRow">
-        <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Left" Style="color: #F52D11; margin-left: 20px">@cs.museums[e.museum].name</RadzenText>
+        <RadzenButton Variant="Variant.Text" Click=@(args => OnClickMuseum()) Text=@cs.museums[e.museum].name Size="ButtonSize.Large"
+                      Style="color: #F52D11;" />
         <div class="textIcon">
-            <RadzenText TextStyle="TextStyle.H5" TextAlign="TextAlign.Right" Style="color: #F52D11">@e.startTime.ToShortDateString()</RadzenText>
-            <RadzenIcon Icon="event" />
+            @*<RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11">@e.startTime.ToShortDateString()</RadzenText>*@
+            <p style="color: #F52D11">@e.startTime.ToShortDateString()</p>
+            <RadzenIcon Icon="event"  style="color: #F52D11; margin-right: 10px"/>
         </div>
     </div>
 
-    <div style="color: black; margin-left: 20px">@e.description</div>
+    <div style="color: black; margin-left: 20px; margin-right: 10px">@e.description</div>
 </RadzenCard>
 
 @code {
     [Parameter]
     public Event e { get; set; }
+    public Museum m { get; set; }
+
 
     async void OnClickEvent()
     {
         sess.currentEvent = e;
         await App.Current.MainPage.Navigation.PushAsync(new xEventPage());
+    }
+    async void OnClickMuseum()
+    {
+        sess.currentMuseum = m;
+        await App.Current.MainPage.Navigation.PushAsync(new xMuseumPage());
     }
 }
 

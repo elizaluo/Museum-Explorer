@@ -5,21 +5,22 @@
             x:Class="musei.MainPage"
             BarBackgroundColor="White"
             SelectedTabColor="#f44336"
-            NavigationPage.HasNavigationBar="False">
+            NavigationPage.HasNavigationBar="False"
+            >
             
-    <NavigationPage Title="Home">
+    <NavigationPage IconImageSource="Images/home.png">
         <x:Arguments>
             <local1:xHomePage />
         </x:Arguments>
     </NavigationPage>
 
-    <NavigationPage Title="Museums">
+    <NavigationPage IconImageSource="Images/bank.png">
         <x:Arguments>
             <local1:xAllMuseums />
         </x:Arguments>
     </NavigationPage>
 
-    <NavigationPage Title="Account">
+    <NavigationPage IconImageSource="Images/account.png">
         <x:Arguments>
             <local1:xAccount />
         </x:Arguments>

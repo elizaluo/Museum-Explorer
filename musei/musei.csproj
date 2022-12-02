@@ -44,12 +44,7 @@
 	<ItemGroup>
 		<PackageReference Include="Radzen.Blazor" Version="4.1.14" />
 	</ItemGroup>
-	<ItemGroup>
-		<None Remove="Resources\Images\Vector.svg" />
-		<None Remove="Resources\Images\image 3.png" />
-		<None Remove="Resources\Images\" />
-		<None Remove="Resources\Images\dotnet_bot.svg" />
-	</ItemGroup>
+
 	<ItemGroup>
 				<BundleResource Include="Resources\AppIcon\*" />
 

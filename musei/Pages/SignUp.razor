@@ -73,7 +73,7 @@
 
     async void OnClickLogin()
     {
-        await App.Current.MainPage.Navigation.PushAsync(new xAccount());
+        await App.Current.MainPage.Navigation.PopToRootAsync();
     }
 
     void OnInvalidSubmit(FormInvalidSubmitEventArgs args) { }
