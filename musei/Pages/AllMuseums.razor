@@ -26,20 +26,22 @@
         padding: 20px;
     }
 
-
-    .bottom {
-        position: absolute;
-        top: 40px;
-        right: 40px;
-        text-align: right;
+    .refreshButton {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        text-align: center;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
     }
 </style>
 
 <body>
-    <div class="bottom">
-        <RadzenButton IsBusy=@isRefreshing Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Click=@(args => OnClickRefresh()) Icon="refresh"/>
+    <div>
+        <RadzenButton class="refreshButton" IsBusy=@isRefreshing Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger"
+                      Click=@(args => OnClickRefresh()) Icon="refresh"/>
     </div>
-    <br />
     <div class="flexColumn">
         <div class="museumList">
             @if (cs.museums.Count == 0 || isRefreshing)

@@ -38,6 +38,16 @@
         right: 40px;
         text-align: right;
     }
+
+    .refreshButton {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        text-align: center;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+    }
 </style>
 
 <RadzenNotification />
@@ -88,7 +98,8 @@
 else
 {
 <body>
-    <RadzenButton IsBusy=@loggingIn Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Click=@(args => OnClickRefresh()) Icon="refresh" />
+    <RadzenButton class="refreshButton" IsBusy=@loggingIn Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger"
+                  Click=@(args => OnClickRefresh()) Icon="refresh" />
 
     <div class="flexRow" style="justify-content:space-evenly">
         <RadzenText TextAlign="TextAlign.Left">
