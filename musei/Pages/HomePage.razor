@@ -21,12 +21,14 @@
 <body>
     <div class="eventNewsList">
 
-        @if (cs.events.Count == 0)
+        @if (cs.events.Count == 0 || isRefreshing)
         {
             <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
         }
         else
         {
+            <RadzenButton IsBusy=@isRefreshing Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Click=@(args => OnClickRefresh()) Icon="refresh" />
+
             foreach (Event ev in cs.events.Values)
             {
                 <RadzenCard Class="rz-shadow-2"
@@ -40,9 +42,23 @@
 </body>
 
 @code {
+
+    public bool isRefreshing = false;
+
     protected override async Task OnInitializedAsync()
     {
         await cs.GetMuseums();
         await cs.GetEvents();
+    }
+
+    async void OnClickRefresh()
+    {
+        isRefreshing = true;
+        StateHasChanged();
+        Console.WriteLine("Refresh");
+        cs.museums = await cs.GetMuseums();
+        cs.events = await cs.GetEvents();
+        isRefreshing = false;
+        StateHasChanged();
     }
 }

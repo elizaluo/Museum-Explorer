@@ -58,6 +58,14 @@
             <div class="buttons">
                 <RadzenButton Variant="Variant.Text" ButtonStyle="ButtonStyle.Danger" Style="width"
                               Click=@(args => OnClickMuseum()) Text="@m.name" Size="ButtonSize.Large" />
+                @if (sess.currentUser != null && m != null && sess.currentUser.followedMuseums.Contains(m.id))
+                {
+                    followStatus = "Unfollow";
+                }
+                else
+                {
+                    followStatus = "Follow";
+                }
                 <RadzenButton Variant="Variant.Flat" Click=@(args => OnClickFollow()) Text=@followStatus
                               ButtonStyle="ButtonStyle.Danger" />
             </div>
@@ -100,21 +108,10 @@
         await cs.UpsertUser(sess.currentUser);
     }
 
-    protected override void OnInitialized()
-    {
-        Console.WriteLine($"\n\nON INIT\ncurrent user = {sess.currentUser}\n{m}\n");
-        if (sess.currentUser != null && m != null && sess.currentUser.followedMuseums.Contains(m.id))
-        {
-            Console.WriteLine("\n\nSETTING STATUS\n\n");
-
-            followStatus = "Unfollow";
-        }
-    }
-
     void OnClickAddress()
     {
     }
-    
+
     async void OnClickMuseum()
     {
         sess.currentMuseum = m;

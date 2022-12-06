@@ -87,38 +87,40 @@
 }
 else
 {
-    <body>
-        <div class="flexRow" style="justify-content:space-evenly">
-            <RadzenText TextAlign="TextAlign.Left">
-                <RadzenButton Variant="Variant.Flat" Click=@(args => OnResetPassword("reset password")) Text="Reset Password"
-                              ButtonStyle="ButtonStyle.Danger" />
-            </RadzenText>
-            <RadzenText TextAlign="TextAlign.Right">
-                <RadzenButton Variant="Variant.Flat" Click=@(args => OnLogout("logging out")) Text="Log Out"
-                              ButtonStyle="ButtonStyle.Danger" />
-            </RadzenText>
+<body>
+    <RadzenButton IsBusy=@loggingIn Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Click=@(args => OnClickRefresh()) Icon="refresh" />
+
+    <div class="flexRow" style="justify-content:space-evenly">
+        <RadzenText TextAlign="TextAlign.Left">
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnResetPassword("reset password")) Text="Reset Password"
+                          ButtonStyle="ButtonStyle.Danger" />
+        </RadzenText>
+        <RadzenText TextAlign="TextAlign.Right">
+            <RadzenButton Variant="Variant.Flat" Click=@(args => OnLogout("logging out")) Text="Log Out"
+                          ButtonStyle="ButtonStyle.Danger" />
+        </RadzenText>
+    </div>
+
+    <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
+        <div>
+            <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Personal Information</strong></RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">Name: @sess.currentUser.name</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">Birthday: @sess.currentUser.birthDate.ToLongDateString()</RadzenText>
+            <RadzenText TextStyle="TextStyle.H5">Email: @sess.currentUser.id</RadzenText>
+        </div>
+    </RadzenCard>
+
+    <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
+        <div>
+            <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Your Booking(s)</strong></RadzenText>
+            @for (int i = 0; i < sess.currentUser.eventBookings.Count; i++)
+            {
+                <BookingCard b=@sess.currentUser.eventBookings[i] />
+            }
         </div>
 
-        <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
-            <div>
-                <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Personal Information</strong></RadzenText>
-                <RadzenText TextStyle="TextStyle.H5">Name: @sess.currentUser.name</RadzenText>
-                <RadzenText TextStyle="TextStyle.H5">Birthday: @sess.currentUser.birthDate.ToLongDateString()</RadzenText>
-                <RadzenText TextStyle="TextStyle.H5">Email: @sess.currentUser.id</RadzenText>
-            </div>
-        </RadzenCard>
-
-        <RadzenCard Class="rz-shadow-0" Style="margin-bottom: 20px; background-color: #EFEFF0; border-radius: 20px;">
-            <div>
-                <RadzenText TextStyle="TextStyle.H5" Style="color: #F52D11"><strong>Your Booking(s)</strong></RadzenText>
-                @for (int i = 0; i < sess.currentUser.eventBookings.Count; i++)
-                {
-                    <BookingCard b=@sess.currentUser.eventBookings[i] />
-                }
-            </div>
-
-        </RadzenCard>
-    </body>
+    </RadzenCard>
+</body>
 }
 
 @code{
@@ -155,6 +157,8 @@ else
         }
         StateHasChanged();
         loggingIn = false;
+        StateHasChanged();
+
     }
 
     async void OnRegister(string name)
@@ -168,4 +172,16 @@ else
     }
 
     void OnInvalidSubmit(FormInvalidSubmitEventArgs args) { }
+
+    async void OnClickRefresh()
+    {
+        loggingIn = true;
+        StateHasChanged();
+        Console.WriteLine("Refresh");
+        //cs.museums = await cs.GetMuseums();
+        //cs.events = await cs.GetEvents();
+        loggingIn = false;
+        StateHasChanged();
+    }
+
 }

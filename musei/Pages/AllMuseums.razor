@@ -25,12 +25,23 @@
     body {
         padding: 20px;
     }
+
+
+    .bottom {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        text-align: right;
+    }
 </style>
 
 <body>
+    <div class="bottom">
+        <RadzenButton IsBusy=@isRefreshing Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Click=@(args => OnClickRefresh()) Icon="refresh"/>
+    </div>
     <div class="flexColumn">
         <div class="museumList">
-            @if (cs.museums.Count == 0)
+            @if (cs.museums.Count == 0 || isRefreshing)
             {
                 <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
             }
@@ -44,7 +55,7 @@
                     }
                     else
                     {
-                        <MuseumCardAdmin m=mus />
+                        <MuseumCardClient m=mus />
                     }
                 }
             }
@@ -56,6 +67,19 @@
 
 
 @code{
+    public bool isRefreshing = false;
+
+    async void OnClickRefresh()
+    {
+        isRefreshing = true;
+        StateHasChanged();
+        Console.WriteLine("Refresh");
+        //cs.museums = await cs.GetMuseums();
+        //cs.events = await cs.GetEvents();
+        isRefreshing = false;
+        StateHasChanged();
+    }
+
     protected override async Task OnInitializedAsync()
     {
         await cs.GetMuseums();
