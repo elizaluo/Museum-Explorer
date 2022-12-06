@@ -49,6 +49,11 @@
 				<BundleResource Include="Resources\AppIcon\*" />
 
 		</ItemGroup>
+
+			<ItemGroup>
+				<MauiIcon Include="Resources\AppIcon\appicon.svg" />
+
+		</ItemGroup>
 	
 	<ItemGroup>
 		<BundleResource Include="wwwroot\Images\randmuseum.png" />
