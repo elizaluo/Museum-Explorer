@@ -39,6 +39,7 @@
     <div class="bottom">
         <RadzenButton IsBusy=@isRefreshing Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Click=@(args => OnClickRefresh()) Icon="refresh"/>
     </div>
+    <br />
     <div class="flexColumn">
         <div class="museumList">
             @if (cs.museums.Count == 0 || isRefreshing)
